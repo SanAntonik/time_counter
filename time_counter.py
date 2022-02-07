@@ -29,8 +29,8 @@ def handler(info, show=True, add=False):
         CS: {computer_science} hours.
         English: {english} hours.
         Total study time: {math + computer_science + english} hours.
-        Sport: {sport} times.     
-
+        Sport: {sport} times.
+        
     """
 
     if show:

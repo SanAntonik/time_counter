@@ -1,4 +1,4 @@
-def calculate_spent_time(PATH):
+def calculate(PATH):
     with open(PATH, "r") as f:
         data = f.read()
         lines = data.splitlines()
@@ -18,13 +18,13 @@ def calculate_spent_time(PATH):
             computer_science += int(study[1])
             english += int(study[2])
         total_study_time = (math + computer_science + english) // 60
-        mean = total_study_time // month_last_day
+        mean = total_study_time / month_last_day
 
         return [month, math//60, computer_science//60, english//60, total_study_time, mean, sport]
 
 
-def handler(info, show=True, append_PATH=""):
-    month, math, computer_science, english, total_study_time, mean, sport = info
+def main(show=True, plot=True, append_PATH=""):
+    month, math, computer_science, english, total_study_time, mean, sport = calculate(PATH)
     result = f"""
     {month}:
         Math: {math} hours.
@@ -39,6 +39,8 @@ def handler(info, show=True, append_PATH=""):
     if append_PATH:
         with open(append_PATH, "a") as f:
             f.write(result)
+    if plot:
+        pass
 
 
 if __name__ == '__main__':
@@ -64,7 +66,7 @@ if __name__ == '__main__':
         30:150_50_75:13
         31:115_41_80:13
     """
-    
+    # PATH = "C:/Users/San/Documents/inf/time monitoring/Mar 2022 study data.txt"
     PATH = "C:/Users/San/Documents/inf/time monitoring/studying time.txt"
     append_PATH = "C:/Users/San/Documents/inf/time monitoring/2022 - studies time monitoring.txt"
-    handler(calculate_spent_time(PATH))
+    main(PATH)

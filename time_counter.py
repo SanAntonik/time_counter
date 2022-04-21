@@ -1,4 +1,4 @@
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -26,12 +26,13 @@ def calculate(path):
             # calculations for plotting
             study_per_day.append(int(study[0]) + int(study[1]) + int(study[2]))
         month_days = [x for x in range(1, month_last_day+1)]
-        plot_data = (month_days, study_per_day)
+        data_to_plot = (month_days, study_per_day)
         print(month_days)
         print(study_per_day)
-        print(plot_data)
+        print(data_to_plot)
 
-        print(sum(study_per_day), (sum(study_per_day)//60), round((sum(study_per_day)/60)), sum(study_per_day)/60)
+        print(sum(study_per_day), (sum(study_per_day)//60),
+              round((sum(study_per_day)/60)), sum(study_per_day)/60)
         sum_subjects = math + cs + english
         print(sum_subjects)
         total_study = sum_subjects // 60
@@ -48,12 +49,12 @@ def calculate(path):
         english_hs = round(english / 60)
         print(math_hs, cs_hs, english_hs)
 
-
-        return [month, math_hs, cs_hs, english_hs, total_study, mean, std, sport, plot_data]
+        return [month, math_hs, cs_hs, english_hs, total_study, mean, std, sport, data_to_plot]
 
 
 def main(path, show=True, plot=True, append_path=""):
-    month, math_hs, cs_hs, english_hs, total_study, mean, std, sport, plot_data = calculate(path)
+    month, math_hs, cs_hs, english_hs, total_study, mean, std, sport, data_to_plot = calculate(
+        path)
     result = f"""
     {month}:
         Math: {math_hs} hours.
@@ -70,7 +71,26 @@ def main(path, show=True, plot=True, append_path=""):
         with open(append_path, "a") as f:
             f.write(result)
     if plot:
-        pass
+        plot_data(data_to_plot, mean, std, month)
+
+
+# plot mean, mean+-standart deviation
+def mean_std(ax, mean, std):
+    ax.axhline(y=mean-std, color='k', linestyle='-')
+    ax.axhline(y=mean, color='r', linestyle='-', label="mean")
+    ax.axhline(y=mean+std, color='k', linestyle='-', label="mean+-std")
+
+
+def plot_data(data_to_plot, mean, std, month):
+    month_days, study_per_day = data_to_plot
+
+    fig, ax = plt.subplots()
+    fig.suptitle(month)
+    ax.bar(month_days, study_per_day, color="purple")
+    mean_std(ax, mean, std)
+    ax.legend()
+    plt.xticks(month_days)
+    plt.show()
 
 
 if __name__ == '__main__':

@@ -1,3 +1,7 @@
+import matplotlib as plt
+import math
+
+
 def calculate(PATH):
     with open(PATH, "r") as f:
         data = f.read()
@@ -5,8 +9,9 @@ def calculate(PATH):
         month = lines[0]
 
         math = 0
-        computer_science = 0
+        cs = 0
         english = 0
+        study_per_day = []
         for line in lines[1::]:
             content = line.split(":")
             if lines[-1] == line:
@@ -15,23 +20,42 @@ def calculate(PATH):
 
             study = content[1].split("_")
             math += int(study[0])
-            computer_science += int(study[1])
+            cs += int(study[1])
             english += int(study[2])
-        total_study_time = (math + computer_science + english) // 60
-        mean = total_study_time / month_last_day
 
-        return [month, math//60, computer_science//60, english//60, total_study_time, mean, sport]
+            # calculations for plotting
+            study_per_day.append(int(study[0]) + int(study[1]) + int(study[2]))
+        month_days = [x for x in range(1, month_last_day+1)]
+        plot_data = (month_days, study_per_day)
+        print(month_days)
+        print(study_per_day)
+        print(plot_data)
+
+        print(sum(study_per_day), (sum(study_per_day)//60), round((sum(study_per_day)/60)), sum(study_per_day)/60)
+        sum_subjects = math + cs + english
+        print(sum_subjects)
+        total_study = sum_subjects // 60
+        print(total_study, sum_subjects / 60)
+        total_study = round(sum_subjects / 60)
+        print(total_study)
+
+        mean = round(sum_subjects / month_last_day)
+        math_hs = round(math / 60)
+        cs_hs = round(cs / 60)
+        english_hs = round(english / 60)
+        print(math_hs, cs_hs, english_hs)
+        return [month, math_hs, cs_hs, english_hs, total_study, mean, sport, plot_data]
 
 
 def main(show=True, plot=True, append_PATH=""):
-    month, math, computer_science, english, total_study_time, mean, sport = calculate(PATH)
+    month, math_hs, cs_hs, english_hs, total_study, mean, sport, plot_data = calculate(PATH)
     result = f"""
     {month}:
-        Math: {math} hours.
-        CS: {computer_science} hours.
-        English: {english} hours.
-        Total study time: {total_study_time} hours.
-        Arithmetic mean: {mean} hours.
+        Math: {math_hs} hours.
+        CS: {cs_hs} hours.
+        English: {english_hs} hours.
+        Total study time: {total_study} hours.
+        Arithmetic mean: {mean} minutes.
         Sport: {sport} times.\n"""
 
     if show:

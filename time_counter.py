@@ -27,28 +27,15 @@ def calculate(path):
             study_per_day.append(int(study[0]) + int(study[1]) + int(study[2]))
         month_days = [x for x in range(1, month_last_day+1)]
         data_to_plot = (month_days, study_per_day)
-        print(month_days)
-        print(study_per_day)
-        print(data_to_plot)
 
-        print(sum(study_per_day), (sum(study_per_day)//60),
-              round((sum(study_per_day)/60)), sum(study_per_day)/60)
         sum_subjects = math + cs + english
-        print(sum_subjects)
-        total_study = sum_subjects // 60
-        print(total_study, sum_subjects / 60)
         total_study = round(sum_subjects / 60)
-        print(total_study)
-
         mean = round(sum_subjects / month_last_day)
         std = round(np.sqrt(
             (sum([(day_total - mean)**2 for day_total in study_per_day]))/(month_last_day)))
-        print("standart deviation", std)
         math_hs = round(math / 60)
         cs_hs = round(cs / 60)
         english_hs = round(english / 60)
-        print(math_hs, cs_hs, english_hs)
-
         return [month, math_hs, cs_hs, english_hs, total_study, mean, std, sport, data_to_plot]
 
 
@@ -117,6 +104,6 @@ if __name__ == '__main__':
         31:115_41_80:13
     """
     # path = "C:/Users/San/Documents/inf/time monitoring/Mar 2022 study data.txt"
-    path = "C:/Users/San/Documents/inf/time monitoring/studying time.txt"
+    path = "C:/Users/San/Documents/inf/time monitoring/study data.txt"
     append_path = "C:/Users/San/Documents/inf/time monitoring/2022 - studies time monitoring.txt"
     main(path)

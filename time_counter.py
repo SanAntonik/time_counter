@@ -103,7 +103,7 @@ if __name__ == '__main__':
         30:150_50_75:13
         31:115_41_80:13
     """
-    # path = "C:/Users/San/Documents/inf/time monitoring/Mar 2022 study data.txt"
-    path = "C:/Users/San/Documents/inf/time monitoring/study data.txt"
-    append_path = "C:/Users/San/Documents/inf/time monitoring/2022 - studies time monitoring.txt"
+    path = "C:/Users/San/Documents/inf/time monitoring/monthly data/Apr 2022 data.txt"
+    # path = "C:/Users/San/Documents/inf/time monitoring/study data.txt"
+    append_path = "C:/Users/San/Documents/inf/time monitoring/monthly reports/2022 - study reports.txt"
     main(path)

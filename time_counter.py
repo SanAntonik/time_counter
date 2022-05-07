@@ -42,7 +42,7 @@ def calculate(path):
 def main(path, show=True, plot=True, append_path=""):
     month, math_hs, cs_hs, english_hs, total_study, mean, std, sport, data_to_plot = calculate(
         path)
-    result = f"""
+    report = f"""
     {month}:
         Math: {math_hs} hours.
         CS: {cs_hs} hours.
@@ -53,10 +53,16 @@ def main(path, show=True, plot=True, append_path=""):
         Sport: {sport} times.\n"""
 
     if show:
-        print(result)
+        print(report)
     if append_path:
+        # check if report was added before. If yes, give an exception
+        with open(append_path, "r") as f:
+            data = f.read()
+            if month in data:
+                raise ValueError("Report is already present. You can't add the same report twice")
+
         with open(append_path, "a") as f:
-            f.write(result)
+            f.write(report)
     if plot:
         plot_data(data_to_plot, mean, std, month)
 
@@ -103,7 +109,7 @@ if __name__ == '__main__':
         30:150_50_75:13
         31:115_41_80:13
     """
-    path = "C:/Users/San/Documents/inf/time monitoring/monthly data/Apr 2022 data.txt"
-    # path = "C:/Users/San/Documents/inf/time monitoring/study data.txt"
+    # path = "C:/Users/San/Documents/inf/time monitoring/monthly data/Apr 2022 data.txt"
+    path = "C:/Users/San/Documents/inf/time monitoring/study data.txt"
     append_path = "C:/Users/San/Documents/inf/time monitoring/monthly reports/2022 - study reports.txt"
     main(path)

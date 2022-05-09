@@ -26,7 +26,6 @@ def calculate(path):
             # calculations for plotting
             study_per_day.append(int(study[0]) + int(study[1]) + int(study[2]))
         month_days = [x for x in range(1, month_last_day+1)]
-        data_to_plot = (month_days, study_per_day)
 
         sum_subjects = math + cs + english
         total_study = round(sum_subjects / 60)
@@ -36,13 +35,11 @@ def calculate(path):
         math_hs = round(math / 60)
         cs_hs = round(cs / 60)
         english_hs = round(english / 60)
-        return [month, math_hs, cs_hs, english_hs, total_study, mean, std, sport, data_to_plot]
+        return [month, math_hs, cs_hs, english_hs, total_study, mean, std, sport, month_days, study_per_day]
 
 
-def main(path, show=True, plot=True, append_path=""):
-    month, math_hs, cs_hs, english_hs, total_study, mean, std, sport, data_to_plot = calculate(
-        path)
-    report = f"""
+def generate_report(month, math_hs, cs_hs, english_hs, total_study, mean, std, sport):
+    return f"""
     {month}:
         Math: {math_hs} hours.
         CS: {cs_hs} hours.
@@ -52,19 +49,52 @@ def main(path, show=True, plot=True, append_path=""):
         Standart deviation: {std} minutes.
         Sport: {sport} times.\n"""
 
-    if show:
-        print(report)
-    if append_path:
-        # check if report was added before. If yes, give an exception
-        with open(append_path, "r") as f:
-            data = f.read()
-            if month in data:
-                raise ValueError("Report is already present. You can't add the same report twice")
 
-        with open(append_path, "a") as f:
-            f.write(report)
+def append_report(report):
+    # check if report was added before. If yes, give an exception
+    with open(append_path, "r") as f:
+        data = f.read()
+        if report in data:
+            raise ValueError("Report is already present. You can't add the same report twice")
+
+    with open(append_path, "a") as f:
+        f.write(report)
+
+
+def day_stats():
+    pass
+
+
+def main(path, show_report=True, show_day_stats=True, plot=True, append_path=""):
+    data = calculate(path)
+    month, math_hs, cs_hs, english_hs, total_study, mean, std, sport, month_days, study_per_day = data
+    report = generate_report(month, math_hs, cs_hs, english_hs, total_study, mean, std, sport)
+
+    print(data)
+    print(goal_mean)
+    print(study_per_day[-1])
+    current_day = study_per_day[-1]
+    print(current_day)
+    if current_day < goal_mean:
+        print(f"You haven't studied enough today. Study {goal_mean - current_day} more min")
+    else:
+        print("Great job! You've studied enough today. Have some rest.")
+    print(mean)
+    print(month_days[-1] * goal_mean, sum(study_per_day))
+    print(month_days[-1] * goal_mean - sum(study_per_day))
+    print(goal_mean * 31 / 60, round(goal_mean * 31 / 60))
+    if mean < goal_mean:
+        print(mean, goal_mean)
+    
+
+    if show_report:
+        print(report)
+    if show_day_stats:
+        day_stats()
+    if append_path:
+        append_report(report)
     if plot:
-        plot_data(data_to_plot, mean, std, month)
+        plot_data(month_days, study_per_day, mean, std, month)
 
 
 # plot mean, mean+-standart deviation
@@ -74,9 +104,7 @@ def mean_std(ax, mean, std):
     ax.axhline(y=mean+std, color='k', linestyle='-', label="mean+-std")
 
 
-def plot_data(data_to_plot, mean, std, month):
-    month_days, study_per_day = data_to_plot
-
+def plot_data(month_days, study_per_day, mean, std, month):
     fig, ax = plt.subplots()
     fig.suptitle(month)
     ax.bar(month_days, study_per_day, color="purple")
@@ -109,7 +137,11 @@ if __name__ == '__main__':
         30:150_50_75:13
         31:115_41_80:13
     """
-    # path = "C:/Users/San/Documents/inf/time monitoring/monthly data/Apr 2022 data.txt"
+
+    path = "C:/Users/San/Documents/inf/time monitoring/monthly data/Apr 2022 data.txt"
     path = "C:/Users/San/Documents/inf/time monitoring/study data.txt"
     append_path = "C:/Users/San/Documents/inf/time monitoring/monthly reports/2022 - study reports.txt"
+    goal_mean = 252
+    goal_hs = 130
+
     main(path)

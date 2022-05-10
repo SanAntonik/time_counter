@@ -62,8 +62,27 @@ def append_report(report):
         f.write(report)
 
 
-def day_stats():
-    pass
+def day_stats(month, mean, study_per_day, month_days):
+    day_total = study_per_day[-1] # how many min you studied last day of data
+    month_year_list = month.split()
+    month_alone = month_year_list[0]
+    year_alone = month_year_list[1]
+    last_day_numb = month_days[-1]
+    # see whether you studied enough today
+    print(f"\nOn {month_alone} {last_day_numb}, {year_alone}\nYou studied: {day_total} min\nYou need to study: {desired_mean_value} min")
+    if day_total < desired_mean_value:
+        print(f"You haven't studied enough today. Study {desired_mean_value - day_total} more min")
+    else:
+        print("Congratulations! You've studied enough! Have some rest")
+
+    print(f"\nYour {month} desired mean value: {desired_mean_value} min\nYour current mean value: {mean} min")
+    # see whether you need to study additionaly to reach your goal mean
+    if mean < desired_mean_value:
+        # find out how many min you need to study to reach your desired mean
+        min_to_study = last_day_numb * desired_mean_value - sum(study_per_day)
+        print(f"You haven't studied enough this month. Study {min_to_study} more min")
+    else:
+        print("Congratulations! You've achieved your desired mean value for this month! Have some rest")
 
 
 def main(show_report=True, show_day_stats=True, plot=True, append_path=""):
@@ -71,44 +90,10 @@ def main(show_report=True, show_day_stats=True, plot=True, append_path=""):
     month, *report_data, mean, std, month_days, study_per_day = data
     report = generate_report(month, report_data, mean, std)
 
-
-    print(data)
-    print(desired_mean_value)
-    day_total = study_per_day[-1]
-    month_year_list = month.split()
-    print(month_year_list)
-    month_alone = month_year_list[0]
-    year_alone = month_year_list[1]
-    print(month_alone, year_alone, "hey hey")
-    print(day_total)
-    print(month)
-    day_number = month_days[-1]
-    print(month_alone, day_number, year_alone)
-    # see whether you studied enough today
-    print(f"\nOn {month_alone} {day_number}, {year_alone}\nYou studied: {day_total} min\nYou need to study: {desired_mean_value} min\n")
-    if day_total < desired_mean_value:
-        print(f"You haven't studied enough today. Study {desired_mean_value - day_total} more min")
-    else:
-        print("Congratulations! You've studied enough! Have some rest")
-    print(mean)
-    print(month_days[-1] * desired_mean_value, sum(study_per_day))
-    print(month_days[-1] * desired_mean_value - sum(study_per_day))
-    print(f"\n\nYour {month} desired mean value: {desired_mean_value} min\nYour current mean value: {mean} min")
-    print(f"To achieve your goal mean, you need to study {month_days[-1] * desired_mean_value - sum(study_per_day)} more min")
-    print(desired_mean_value * 31 / 60, round(desired_mean_value * 31 / 60))
-    # see whether you need to study additionaly to reach your goal mean
-    if mean < desired_mean_value:
-
-        print(f"You haven't studied enough this month. Study ")
-        print(mean, desired_mean_value)      
-    else:
-        print("Congratulations! You've achieved your desired mean value for this month! Have some rest")
-    
-
     if show_report:
         print(report)
     if show_day_stats:
-        day_stats()
+        day_stats(month, mean, study_per_day, month_days)
     if append_path:
         append_report(report)
     if plot:

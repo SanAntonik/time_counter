@@ -35,10 +35,11 @@ def calculate(path):
         math_hs = round(math / 60)
         cs_hs = round(cs / 60)
         english_hs = round(english / 60)
-        return [month, math_hs, cs_hs, english_hs, total_study, mean, std, sport, month_days, study_per_day]
+        return [month, math_hs, cs_hs, english_hs, total_study, sport, mean, std, month_days, study_per_day]
 
 
-def generate_report(month, math_hs, cs_hs, english_hs, total_study, mean, std, sport):
+def generate_report(month, report_data, mean, std):
+    math_hs, cs_hs, english_hs, total_study, sport = report_data
     return f"""
     {month}:
         Math: {math_hs} hours.
@@ -65,26 +66,43 @@ def day_stats():
     pass
 
 
-def main(path, show_report=True, show_day_stats=True, plot=True, append_path=""):
+def main(show_report=True, show_day_stats=True, plot=True, append_path=""):
     data = calculate(path)
-    month, math_hs, cs_hs, english_hs, total_study, mean, std, sport, month_days, study_per_day = data
-    report = generate_report(month, math_hs, cs_hs, english_hs, total_study, mean, std, sport)
+    month, *report_data, mean, std, month_days, study_per_day = data
+    report = generate_report(month, report_data, mean, std)
+
 
     print(data)
-    print(goal_mean)
-    print(study_per_day[-1])
-    current_day = study_per_day[-1]
-    print(current_day)
-    if current_day < goal_mean:
-        print(f"You haven't studied enough today. Study {goal_mean - current_day} more min")
+    print(desired_mean_value)
+    day_total = study_per_day[-1]
+    month_year_list = month.split()
+    print(month_year_list)
+    month_alone = month_year_list[0]
+    year_alone = month_year_list[1]
+    print(month_alone, year_alone, "hey hey")
+    print(day_total)
+    print(month)
+    day_number = month_days[-1]
+    print(month_alone, day_number, year_alone)
+    # see whether you studied enough today
+    print(f"\nOn {month_alone} {day_number}, {year_alone}\nYou studied: {day_total} min\nYou need to study: {desired_mean_value} min\n")
+    if day_total < desired_mean_value:
+        print(f"You haven't studied enough today. Study {desired_mean_value - day_total} more min")
     else:
-        print("Great job! You've studied enough today. Have some rest.")
+        print("Congratulations! You've studied enough! Have some rest")
     print(mean)
-    print(month_days[-1] * goal_mean, sum(study_per_day))
-    print(month_days[-1] * goal_mean - sum(study_per_day))
-    print(goal_mean * 31 / 60, round(goal_mean * 31 / 60))
-    if mean < goal_mean:
-        print(mean, goal_mean)
+    print(month_days[-1] * desired_mean_value, sum(study_per_day))
+    print(month_days[-1] * desired_mean_value - sum(study_per_day))
+    print(f"\n\nYour {month} desired mean value: {desired_mean_value} min\nYour current mean value: {mean} min")
+    print(f"To achieve your goal mean, you need to study {month_days[-1] * desired_mean_value - sum(study_per_day)} more min")
+    print(desired_mean_value * 31 / 60, round(desired_mean_value * 31 / 60))
+    # see whether you need to study additionaly to reach your goal mean
+    if mean < desired_mean_value:
+
+        print(f"You haven't studied enough this month. Study ")
+        print(mean, desired_mean_value)      
+    else:
+        print("Congratulations! You've achieved your desired mean value for this month! Have some rest")
     
 
     if show_report:
@@ -137,11 +155,8 @@ if __name__ == '__main__':
         30:150_50_75:13
         31:115_41_80:13
     """
-
     path = "C:/Users/San/Documents/inf/time monitoring/monthly data/Apr 2022 data.txt"
     path = "C:/Users/San/Documents/inf/time monitoring/study data.txt"
     append_path = "C:/Users/San/Documents/inf/time monitoring/monthly reports/2022 - study reports.txt"
-    goal_mean = 252
-    goal_hs = 130
-
-    main(path)
+    desired_mean_value = 252
+    main(plot=False)

@@ -3,7 +3,7 @@ import numpy as np
 
 
 def calculate(path):
-    with open(path, "r") as f:
+    with open(path, "r", encoding="utf-8") as f:
         data = f.read()
         lines = data.splitlines()
         month = lines[0]
@@ -26,7 +26,6 @@ def calculate(path):
             # calculations for plotting
             study_per_day.append(int(study[0]) + int(study[1]) + int(study[2]))
         month_days = [x for x in range(1, month_last_day+1)]
-
         sum_subjects = math + cs + english
         total_study = round(sum_subjects / 60)
         mean = round(sum_subjects / month_last_day)
@@ -53,17 +52,17 @@ def generate_report(month, report_data, mean, std):
 
 def append_report(report):
     # check if report was added before. If yes, give an exception
-    with open(append_path, "r") as f:
+    with open(append_path, "r", encoding="utf-8") as f:
         data = f.read()
         if report in data:
             raise ValueError("Report is already present. You can't add the same report twice")
 
-    with open(append_path, "a") as f:
+    with open(append_path, "a", encoding="utf-8") as f:
         f.write(report)
 
 
 def day_stats(month, mean, study_per_day, month_days):
-    day_total = study_per_day[-1] # how many min you studied last day of data
+    day_total = study_per_day[-1]  # how many min you studied last day of data
     month_year_list = month.split()
     month_alone = month_year_list[0]
     year_alone = month_year_list[1]
@@ -73,7 +72,7 @@ def day_stats(month, mean, study_per_day, month_days):
     if day_total < desired_mean_value:
         print(f"You haven't studied enough today. Study {desired_mean_value - day_total} more min")
     else:
-        print("Congratulations! You've studied enough! Have some rest")
+        print("Congratulations! You've studied enough today! Have some rest")
 
     print(f"\nYour {month} desired mean value: {desired_mean_value} min\nYour current mean value: {mean} min")
     # see whether you need to study additionaly to reach your goal mean
@@ -118,14 +117,13 @@ def plot_data(month_days, study_per_day, mean, std, month):
 
 
 if __name__ == '__main__':
-    """
-    This program takes text file input where data is organized in the following format:
+    """This program takes text file input where data is organized in the following format:
 
         Month Year
         0:1_2_3:4 per row
 
         where
-        0 - Day of the month (from 1 to 31); 
+        0 - Day of the month (from 1 to 31);
         1 - how many min you studied math;
         2 - how many min you studied computer science;
         3 - how many min you studied English;
@@ -140,8 +138,8 @@ if __name__ == '__main__':
         30:150_50_75:13
         31:115_41_80:13
     """
-    path = "C:/Users/San/Documents/inf/time monitoring/monthly data/Apr 2022 data.txt"
+    # path = "C:/Users/San/Documents/inf/time monitoring/monthly data/Apr 2022 data.txt"
     path = "C:/Users/San/Documents/inf/time monitoring/study data.txt"
     append_path = "C:/Users/San/Documents/inf/time monitoring/monthly reports/2022 - study reports.txt"
-    desired_mean_value = 252
-    main(plot=False)
+    desired_mean_value = 270
+    main()

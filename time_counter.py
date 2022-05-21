@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 
 
 def calculate(path):
@@ -55,7 +56,8 @@ def append_report(report):
     with open(append_path, "r", encoding="utf-8") as f:
         data = f.read()
         if report in data:
-            raise ValueError("Report is already present. You can't add the same report twice")
+            raise ValueError(
+                "Report is already present. You can't add the same report twice")
 
     with open(append_path, "a", encoding="utf-8") as f:
         f.write(report)
@@ -70,16 +72,19 @@ def day_stats(month, mean, study_per_day, month_days):
     # see whether you studied enough today
     print(f"\nOn {month_alone} {last_day_numb}, {year_alone}\nYou studied: {day_total} min\nYou need to study: {desired_mean_value} min")
     if day_total < desired_mean_value:
-        print(f"You haven't studied enough today. Study {desired_mean_value - day_total} more min")
+        print(
+            f"You haven't studied enough today. Study {desired_mean_value - day_total} more min")
     else:
         print("Congratulations! You've studied enough today! Have some rest")
 
-    print(f"\nYour {month} desired mean value: {desired_mean_value} min\nYour current mean value: {mean} min")
+    print(
+        f"\nYour {month} desired mean value: {desired_mean_value} min\nYour current mean value: {mean} min")
     # see whether you need to study additionaly to reach your goal mean
     if mean < desired_mean_value:
         # find out how many min you need to study to reach your desired mean
         min_to_study = last_day_numb * desired_mean_value - sum(study_per_day)
-        print(f"You haven't studied enough this month. Study {min_to_study} more min")
+        print(
+            f"You haven't studied enough this month. Study {min_to_study} more min")
     else:
         print("Congratulations! You've achieved your desired mean value for this month! Have some rest")
 
@@ -116,6 +121,34 @@ def plot_data(month_days, study_per_day, mean, std, month):
     plt.show()
 
 
+# transition to pandas
+def prepare_data(path):
+    """Create list of colnames
+    Load data into df with sep equal to ':' and '_'
+    Create var 'month' with df data from row 0 and col 0
+    Drop the row 0 where 'month' was
+    Reset index, so it again starts with 0
+    Convert all col dtypes to int64
+
+    Args:
+        path (str): path to your data
+
+    Returns:
+        _type_: _description_
+        month (str): month when data was taken
+        df (df): DataFrame with study data
+    """
+    colnames = ["Day", "Math", "CS", "Eng", "Sport"]
+    df = pd.read_csv(
+        filepath_or_buffer=path, sep="[:_]", names=colnames,
+        header=None, engine="python")
+    month = df.iloc[0][0]
+    df.drop(index=0, inplace=True)
+    df = df.reset_index(drop=True)
+    df[colnames] = df[colnames].astype("int64")
+    return month, df
+
+
 if __name__ == '__main__':
     """This program takes text file input where data is organized in the following format:
 
@@ -142,4 +175,8 @@ if __name__ == '__main__':
     path = "C:/Users/San/Documents/inf/time monitoring/study data.txt"
     append_path = "C:/Users/San/Documents/inf/time monitoring/monthly reports/2022 - study reports.txt"
     desired_mean_value = 270
-    main()
+    # main()
+
+    month, df = prepare_data(path)
+    print(month)
+    print(df)

@@ -3,6 +3,90 @@ import numpy as np
 import pandas as pd
 
 
+def append_report(report):
+    # check if report was added before. If yes, give an exception
+    with open(append_path, "r", encoding="utf-8") as f:
+        data = f.read()
+        if report in data:
+            raise ValueError(
+                "Report is already present. You can't add the same report twice")
+
+    with open(append_path, "a", encoding="utf-8") as f:
+        f.write(report)
+        print("Appended successfully")
+
+
+def prepare_data(path):
+    """Create list of colnames
+    Load data into df with sep equal to ':' and '_'
+    Create var 'month' with df data from row 0 and col 0
+    Drop the row 0 where 'month' was
+    Reset index, so it again starts with 0
+    Convert all col dtypes to int64
+
+    Args:
+        path (str): path to your data
+
+    Returns:
+        _type_: _description_
+        month (str): month when data was taken
+        df (df): DataFrame with study data
+    """
+    colnames = ["Day", "Math", "CS", "Eng", "Sport"]
+    df = pd.read_csv(
+        filepath_or_buffer=path, sep="[:_]", names=colnames,
+        header=None, engine="python")
+    month = df.iloc[0][0]
+    df.drop(index=0, inplace=True)
+    df = df.reset_index(drop=True)
+    df[colnames] = df[colnames].astype("int64")
+    return month, df
+
+
+
+def day_stats(month, mean, study_per_day, month_days):
+    day_total = study_per_day[-1]  # how many min you studied last day of data
+    month_year_list = month.split()
+    month_alone = month_year_list[0]
+    year_alone = month_year_list[1]
+    last_day_numb = month_days[-1]
+    # see whether you studied enough today
+    print(f"\nOn {month_alone} {last_day_numb}, {year_alone}\nYou studied: {day_total} min\nYou need to study: {desired_mean_value} min")
+    if day_total < desired_mean_value:
+        print(
+            f"You haven't studied enough today. Study {desired_mean_value - day_total} more min")
+    else:
+        print("Congratulations! You've studied enough today! Have some rest")
+
+    print(
+        f"\nYour {month} desired mean value: {desired_mean_value} min\nYour current mean value: {mean} min")
+    # see whether you need to study additionaly to reach your goal mean
+    if mean < desired_mean_value:
+        # find out how many min you need to study to reach your desired mean
+        min_to_study = last_day_numb * desired_mean_value - sum(study_per_day)
+        print(
+            f"You haven't studied enough this month. Study {min_to_study} more min")
+    else:
+        print("Congratulations! You've achieved your desired mean value for this month! Have some rest")
+
+
+# plot mean, mean+-standart deviation
+def mean_std(ax, mean, std):
+    ax.axhline(y=mean-std, color='k', linestyle='-')
+    ax.axhline(y=mean, color='r', linestyle='-', label="mean")
+    ax.axhline(y=mean+std, color='k', linestyle='-', label="mean+-std")
+
+
+def plot_data(month_days, study_per_day, mean, std, month):
+    fig, ax = plt.subplots()
+    fig.suptitle(month)
+    ax.bar(month_days, study_per_day, color="purple")
+    mean_std(ax, mean, std)
+    ax.legend()
+    plt.xticks(month_days)
+    plt.show()
+
+
 def calculate(path):
     with open(path, "r", encoding="utf-8") as f:
         data = f.read()
@@ -51,44 +135,6 @@ def generate_report(month, report_data, mean, std):
         Sport: {sport} times.\n"""
 
 
-def append_report(report):
-    # check if report was added before. If yes, give an exception
-    with open(append_path, "r", encoding="utf-8") as f:
-        data = f.read()
-        if report in data:
-            raise ValueError(
-                "Report is already present. You can't add the same report twice")
-
-    with open(append_path, "a", encoding="utf-8") as f:
-        f.write(report)
-
-
-def day_stats(month, mean, study_per_day, month_days):
-    day_total = study_per_day[-1]  # how many min you studied last day of data
-    month_year_list = month.split()
-    month_alone = month_year_list[0]
-    year_alone = month_year_list[1]
-    last_day_numb = month_days[-1]
-    # see whether you studied enough today
-    print(f"\nOn {month_alone} {last_day_numb}, {year_alone}\nYou studied: {day_total} min\nYou need to study: {desired_mean_value} min")
-    if day_total < desired_mean_value:
-        print(
-            f"You haven't studied enough today. Study {desired_mean_value - day_total} more min")
-    else:
-        print("Congratulations! You've studied enough today! Have some rest")
-
-    print(
-        f"\nYour {month} desired mean value: {desired_mean_value} min\nYour current mean value: {mean} min")
-    # see whether you need to study additionaly to reach your goal mean
-    if mean < desired_mean_value:
-        # find out how many min you need to study to reach your desired mean
-        min_to_study = last_day_numb * desired_mean_value - sum(study_per_day)
-        print(
-            f"You haven't studied enough this month. Study {min_to_study} more min")
-    else:
-        print("Congratulations! You've achieved your desired mean value for this month! Have some rest")
-
-
 def main(show_report=True, show_day_stats=True, plot=True, append_path=""):
     data = calculate(path)
     month, *report_data, mean, std, month_days, study_per_day = data
@@ -104,49 +150,12 @@ def main(show_report=True, show_day_stats=True, plot=True, append_path=""):
         plot_data(month_days, study_per_day, mean, std, month)
 
 
-# plot mean, mean+-standart deviation
-def mean_std(ax, mean, std):
-    ax.axhline(y=mean-std, color='k', linestyle='-')
-    ax.axhline(y=mean, color='r', linestyle='-', label="mean")
-    ax.axhline(y=mean+std, color='k', linestyle='-', label="mean+-std")
+def plot_df():
+    pass
 
 
-def plot_data(month_days, study_per_day, mean, std, month):
-    fig, ax = plt.subplots()
-    fig.suptitle(month)
-    ax.bar(month_days, study_per_day, color="purple")
-    mean_std(ax, mean, std)
-    ax.legend()
-    plt.xticks(month_days)
-    plt.show()
-
-
-# transition to pandas
-def prepare_data(path):
-    """Create list of colnames
-    Load data into df with sep equal to ':' and '_'
-    Create var 'month' with df data from row 0 and col 0
-    Drop the row 0 where 'month' was
-    Reset index, so it again starts with 0
-    Convert all col dtypes to int64
-
-    Args:
-        path (str): path to your data
-
-    Returns:
-        _type_: _description_
-        month (str): month when data was taken
-        df (df): DataFrame with study data
-    """
-    colnames = ["Day", "Math", "CS", "Eng", "Sport"]
-    df = pd.read_csv(
-        filepath_or_buffer=path, sep="[:_]", names=colnames,
-        header=None, engine="python")
-    month = df.iloc[0][0]
-    df.drop(index=0, inplace=True)
-    df = df.reset_index(drop=True)
-    df[colnames] = df[colnames].astype("int64")
-    return month, df
+def calculate_data():
+    pass
 
 
 if __name__ == '__main__':
@@ -174,9 +183,23 @@ if __name__ == '__main__':
     # path = "C:/Users/San/Documents/inf/time monitoring/monthly data/Apr 2022 data.txt"
     path = "C:/Users/San/Documents/inf/time monitoring/study data.txt"
     append_path = "C:/Users/San/Documents/inf/time monitoring/monthly reports/2022 - study reports.txt"
-    desired_mean_value = 270
+    desired_mean_value = 280
     # main()
 
     month, df = prepare_data(path)
     print(month)
     print(df)
+
+    # print(df.describe())
+    # print(df.groupby("Math").count())
+    # print(df.corr())
+    # df.plot.scatter(x="Day", y="Eng", color="crimson")
+    # print(df[["Math", "CS", "Eng"]].sum())
+    total_per_subject = df[["Math", "CS", "Eng"]].sum(axis=0).div(60).round().astype(int)
+    math_hs, cs_hs, eng_hs = total_per_subject
+    print(math_hs, cs_hs, eng_hs, sum(total_per_subject))
+    print(total_per_subject, type(total_per_subject), type(df))
+    total_per_day = df[["Math", "CS", "Eng"]].sum(axis=1)
+    total_hs = round(total_per_day.sum() / 60)
+    print(total_per_day, type(total_per_day), total_hs)
+    # plt.show()

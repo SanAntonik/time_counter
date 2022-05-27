@@ -140,6 +140,8 @@ def main(show_report=True, show_day_stats=True, plot=True, append_path=""):
     month, *report_data, mean, std, month_days, study_per_day = data
     report = generate_report(month, report_data, mean, std)
 
+    print(month_days)
+    print(study_per_day)
     if show_report:
         print(report)
     if show_day_stats:
@@ -159,32 +161,11 @@ def calculate_data():
 
 
 if __name__ == '__main__':
-    """This program takes text file input where data is organized in the following format:
-
-        Month Year
-        0:1_2_3:4 per row
-
-        where
-        0 - Day of the month (from 1 to 31);
-        1 - how many min you studied math;
-        2 - how many min you studied computer science;
-        3 - how many min you studied English;
-        4 - if you exercised that day, update counter by +1;
-
-        Part of March 2022 file as an example:
-        March 2022
-        01:125_80_10:0
-        02:0_0_10:0
-        03:2_133_60:1
-        ...
-        30:150_50_75:13
-        31:115_41_80:13
-    """
     # path = "C:/Users/San/Documents/inf/time monitoring/monthly data/Apr 2022 data.txt"
     path = "C:/Users/San/Documents/inf/time monitoring/study data.txt"
     append_path = "C:/Users/San/Documents/inf/time monitoring/monthly reports/2022 - study reports.txt"
     desired_mean_value = 280
-    # main()
+    main(plot=False)
 
     month, df = prepare_data(path)
     print(month)
@@ -195,11 +176,28 @@ if __name__ == '__main__':
     # print(df.corr())
     # df.plot.scatter(x="Day", y="Eng", color="crimson")
     # print(df[["Math", "CS", "Eng"]].sum())
-    total_per_subject = df[["Math", "CS", "Eng"]].sum(axis=0).div(60).round().astype(int)
+    sport = df["Sport"].iloc[-1]
+    print(sport, type(sport))
+
+    total_per_subject = df[["Math", "CS", "Eng"]].sum(axis=0).div(60).round().astype(np.int64)
     math_hs, cs_hs, eng_hs = total_per_subject
     print(math_hs, cs_hs, eng_hs, sum(total_per_subject))
     print(total_per_subject, type(total_per_subject), type(df))
+
     total_per_day = df[["Math", "CS", "Eng"]].sum(axis=1)
+    df["Total"] = total_per_day
+    mean = round(total_per_day.mean())
+    std = round(total_per_day.std(ddof=0))
+    print(std)
+    print("mean value", total_per_day.mean(), mean)
     total_hs = round(total_per_day.sum() / 60)
     print(total_per_day, type(total_per_day), total_hs)
+
+    report_data = [math_hs, cs_hs, eng_hs, total_hs, sport]
+    print(report_data)
+    report = generate_report(month, report_data, mean, std)
+    print(report)
+
+    print(df)
+    print(df[["Day", "Total"]])
     # plt.show()

@@ -1,10 +1,12 @@
-# time_counter
+## time_counter
 
 Small program to help me keep track of how long I study. 
+
 It loads input from a specified file, makes calculations, prints result to the screen, and appends output to another file.
 
 Input file must be a text file with the following format:
 
+```
   Month Year
   0:1_2_3:4 per row
 
@@ -23,3 +25,4 @@ Input file must be a text file with the following format:
   ...
   30:150_50_75:13
   31:115_41_80:13
+```

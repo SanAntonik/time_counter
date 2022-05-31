@@ -1,7 +1,4 @@
-def day_stats(month, mean, df, desired_mean_value):
-    study_per_day = df["Total"].tolist()
-    month_days = df["Day"].tolist()
-
+def day_stats(month, mean, month_days, study_per_day, desired_mean_value):
     day_total = study_per_day[-1]  # how many min you studied last day of data
     month_year_list = month.split()
     month_alone = month_year_list[0]

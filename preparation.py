@@ -2,7 +2,8 @@ import pandas as pd
 
 
 def prepare_data(path):
-    """Create list of colnames
+    """
+    Create list of colnames
     Load data into df with sep equal to ':' and '_'
     Create var 'month' with df data from row 0 and col 0
     Drop the row 0 where 'month' was

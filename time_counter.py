@@ -4,19 +4,7 @@ import pandas as pd
 
 from preparation import prepare_data
 from calculation import calculate_data
-
-
-def append_report(report):
-    # check if report was added before. If yes, give an exception
-    with open(append_path, "r", encoding="utf-8") as f:
-        data = f.read()
-        if report in data:
-            raise ValueError(
-                "Report is already present. You can't add the same report twice")
-
-    with open(append_path, "a", encoding="utf-8") as f:
-        f.write(report)
-        print("Appended successfully")
+from handle_reports import generate_report, append_report
 
 
 def day_stats(month, mean, study_per_day, month_days):
@@ -66,19 +54,6 @@ def plot_df():
     pass
 
 
-def generate_report(month, report_data, mean, std):
-    math_hs, cs_hs, english_hs, total_study, sport = report_data
-    return f"""
-    {month}:
-        Math: {math_hs} hours.
-        CS: {cs_hs} hours.
-        English: {english_hs} hours.
-        Total study time: {total_study} hours.
-        Arithmetic mean: {mean} minutes.
-        Standart deviation: {std} minutes.
-        Sport: {sport} times.\n"""
-
-
 def main(show_report=True, show_day_stats=True, plot=True, append_path=""):
     # data = calculate(path)
     # month, *report_data, mean, std, month_days, study_per_day = data
@@ -96,7 +71,7 @@ def main(show_report=True, show_day_stats=True, plot=True, append_path=""):
     # if show_day_stats:
     #     day_stats(month, mean, study_per_day, month_days)
     if append_path:
-        append_report(report)
+        append_report(report, append_path)
     # if plot:
     #     plot_data(month_days, study_per_day, mean, std, month)
 

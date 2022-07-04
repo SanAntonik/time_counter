@@ -1,7 +1,7 @@
 from preparation import prepare_data
 from calculation import calculate_data
 from handle_reports import generate_report, append_report
-from monitoring import day_stats
+from monitoring import cur_stats
 from plotting import plot_data
 
 
@@ -16,7 +16,7 @@ def main(show_report=True, show_day_stats=True, plot=True, append_path=""):
     if show_report:
         print(report)
     if show_day_stats:
-        day_stats(month, mean, month_days, study_per_day, desired_mean_value)
+        cur_stats(month, mean, month_days, study_per_day, desired_mean_value)
     if append_path:
         append_report(report, append_path)
     if plot:
@@ -24,8 +24,8 @@ def main(show_report=True, show_day_stats=True, plot=True, append_path=""):
 
 
 if __name__ == '__main__':
-    # path = "C:/Users/San/Documents/inf/time monitoring/monthly data/Apr 2022 data.txt"
+    # path = "C:/Users/San/Documents/inf/time monitoring/monthly data/June 2022 data.txt"
     path = "C:/Users/San/Documents/inf/time monitoring/study data.txt"
     append_path = "C:/Users/San/Documents/inf/time monitoring/monthly reports/2022 - study reports.txt"
-    desired_mean_value = 280
+    desired_mean_value = 210
     main()

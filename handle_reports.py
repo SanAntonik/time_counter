@@ -8,7 +8,7 @@ def append_report(report, append_path):
 
     with open(append_path, "a", encoding="utf-8") as f:
         f.write(report)
-        print("Appended successfully")
+        print("\nYour report was appended successfully\n")
 
 
 def generate_report(month, report_data, mean, std):

@@ -24,8 +24,8 @@ def main(show_report=True, show_day_stats=True, plot=True, append_path=""):
 
 
 if __name__ == '__main__':
-    # path = "C:/Users/San/Documents/inf/time monitoring/monthly data/June 2022 data.txt"
     path = "C:/Users/San/Documents/inf/time monitoring/study data.txt"
+    # path = "C:/Users/San/Documents/inf/time monitoring/monthly data/June 2022 data.txt"
     append_path = "C:/Users/San/Documents/inf/time monitoring/monthly reports/2022 - study reports.txt"
-    desired_mean_value = 210
+    desired_mean_value = 180
     main()

@@ -7,7 +7,7 @@ from plotting import plot_data
 
 def main(show_report=True, show_day_stats=True, plot=True, append_path=""):
     month, df = prepare_data(path)
-    *report_data, mean, std, month_days, study_per_day = calculate_data(df)
+    *report_data, mean, std, month_days, study_per_day = calculate_data(df, day_offs)
     report = generate_report(month, report_data, mean, std)
 
     print(month)
@@ -28,4 +28,7 @@ if __name__ == '__main__':
     # path = "C:/Users/San/Documents/inf/time monitoring/monthly data/June 2022 data.txt"
     append_path = "C:/Users/San/Documents/inf/time monitoring/monthly reports/2022 - study reports.txt"
     desired_mean_value = 180
+    # pass vacation day numbers
+    day_offs = [3, 4, 11, 18, 24, 25]
+    # day_offs = []
     main()

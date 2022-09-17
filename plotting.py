@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
+import seaborn as sns
 
 
 # plot mean, mean+-standart deviation
@@ -10,11 +9,9 @@ def mean_std(ax, mean, std):
     ax.axhline(y=mean+std, color='k', linestyle='-', label="mean+-std")
 
 
-def plot_data(month_days, study_per_day, mean, std, month):
-    fig, ax = plt.subplots()
-    fig.suptitle(month)
-    ax.bar(month_days, study_per_day, color="purple")
+def plot_data(df, mean, std, month):
+    ax = sns.barplot(x="Day", y="Total", data=df, hue="Kind", dodge=False)
     mean_std(ax, mean, std)
-    ax.legend()
-    plt.xticks(month_days)
+    plt.title(month)
+    plt.legend()
     plt.show()

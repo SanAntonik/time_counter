@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-def calculate_data(df, day_offs):
+def calculate_data(df):
     """
     Get last value from the 'Sport' col
     Get summed values from 'Math', 'CS', and 'Eng' cols
@@ -25,12 +25,10 @@ def calculate_data(df, day_offs):
     df["Total"] = total_per_day
     total_hs = round(total_per_day.sum() / 60)
 
-    # handle vacation days. Your mean and std must not
-    # include data from vacation days
-    if len(day_offs) > 0:
-        last_recorded_day = df["Day"].iloc[-1]
-        passed_day_offs = [day for day in day_offs if day <= last_recorded_day]
-        df_removed_day_offs = df.loc[~df["Day"].isin(passed_day_offs)]
+    # handle vacation days. Your mean and std
+    # must not include data from vacation days
+    if "relax" in df["Kind"].values:
+        df_removed_day_offs = df[~df["Kind"].str.contains("relax")]
         total_per_day = df_removed_day_offs["Total"]
     mean = round(total_per_day.mean())
     std = round(total_per_day.std(ddof=0))

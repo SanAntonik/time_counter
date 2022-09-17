@@ -6,8 +6,8 @@ from plotting import plot_data
 
 
 def main(show_report=True, show_day_stats=True, plot=True, append_path=""):
-    month, df = prepare_data(path)
-    *report_data, mean, std, month_days, study_per_day = calculate_data(df, day_offs)
+    month, df = prepare_data(path, day_offs)
+    *report_data, mean, std, month_days, study_per_day = calculate_data(df)
     report = generate_report(month, report_data, mean, std)
 
     print(month)
@@ -20,7 +20,7 @@ def main(show_report=True, show_day_stats=True, plot=True, append_path=""):
     if append_path:
         append_report(report, append_path)
     if plot:
-        plot_data(month_days, study_per_day, mean, std, month)
+        plot_data(df, mean, std, month)
 
 
 if __name__ == '__main__':
@@ -30,5 +30,4 @@ if __name__ == '__main__':
     desired_mean_value = 180
     # pass vacation day numbers
     day_offs = [3, 4, 11, 18, 24, 25]
-    # day_offs = []
     main()

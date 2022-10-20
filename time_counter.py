@@ -5,9 +5,9 @@ from monitoring import cur_stats
 from plotting import plot_data
 
 
-def main(show_report=True, show_stats=True, plot=True, append_path=""):
-    month, df = prepare_data(path, day_offs)
-    *report_data, mean, std, min_to_study = calculate_data(df, desired_mean_value)
+def main(show_report=True, show_stats=True, plot=True, append=False):
+    month, df = prepare_data(PATH, DAY_OFFS)
+    *report_data, mean, std, min_to_study = calculate_data(df, DESIRED_MEAN_VALUE)
     report = generate_report(month, report_data, mean, std)
 
     print(month)
@@ -17,23 +17,29 @@ def main(show_report=True, show_stats=True, plot=True, append_path=""):
         print(report)
     if show_stats:
         cur_stats(df, month, mean, min_to_study,
-                  desired_mean_value)
-    if append_path:
-        append_report(report, append_path)
+                  DESIRED_MEAN_VALUE)
+    if append:
+        # BEWARE: your 'study data' gets overwritten
+        # with a new template if you use append_report!!!
+        append_report(report, PATH, APPEND_PATH, PREVIOUS_DATA_FOLDER)
     if plot:
         plot_data(df, mean, std, month)
 
 
 if __name__ == '__main__':
-    path = "C:/Users/San/Documents/inf/time monitoring/study data.txt"
-    append_path = "C:/Users/San/Documents/inf/time monitoring/monthly reports/2022 - study reports.txt"
-    desired_mean_value = 240
+    # path, append_path, previous_data_folder,
+    # desired_mean_value, and day_offs are all constants
+    # I should handle them better somehow
+    PATH = "C:/Users/San/Documents/inf/time monitoring/study data.txt"
+    APPEND_PATH = "C:/Users/San/Documents/inf/time monitoring/monthly reports/2022 - study reports.txt"
+    PREVIOUS_DATA_FOLDER = "C:/Users/San/Documents/inf/time monitoring/monthly data/"
+    DESIRED_MEAN_VALUE = 240
     # pass vacation day numbers
-    day_offs = [2, 7, 16, 23, 30]
+    DAY_OFFS = [2, 7, 16, 23, 30]
 
     # # data for tests and such
-    # path = "C:/Users/San/Documents/inf/time monitoring/monthly data/September 2022.txt"
-    # desired_mean_value = 180
-    # day_offs = [3, 4, 11, 18]
+    # PATH = "C:/Users/San/Documents/inf/time monitoring/monthly data/September 2022.txt"
+    # DESIRED_MEAN_VALUE = 180
+    # DAY_OFFS = [3, 4, 11, 18]
 
     main()

@@ -1,13 +1,14 @@
 import pandas as pd
 
 
-def prepare_data(path, day_offs):
+def prepare_data(PATH, DAY_OFFS):
     """
     Summary:
         Prepare data for further operations
 
     Args:
-        path (str): path to your data
+        PATH (str, constant): path to your data
+        DAY_OFFS (int list constant): days when you relax
 
     Returns:
         _type_: _description_
@@ -18,7 +19,7 @@ def prepare_data(path, day_offs):
     colnames = ["Day", "Math", "CS", "Eng", "Sport"]
     # Load data into df with sep equal to ':' and '_'
     df = pd.read_csv(
-        filepath_or_buffer=path, sep="[:_]", names=colnames,
+        filepath_or_buffer=PATH, sep="[:_]", names=colnames,
         header=None, engine="python")
     # Create var 'month' with df data from row 0 and col 0
     month = df.iloc[0][0]
@@ -30,7 +31,7 @@ def prepare_data(path, day_offs):
     df[colnames] = df[colnames].astype("int64")
     # Create a new col with info about whether
     # you work or relax on a particular day
-    df["Kind"] = df.apply(lambda row: categorise(row, day_offs), axis=1)
+    df["Kind"] = df.apply(lambda row: categorise(row, DAY_OFFS), axis=1)
     # Rearrange order of cols
     cols = df.columns.tolist()
     cols = [cols[0]] + [cols[-1]] + cols[1:-1]
@@ -38,7 +39,7 @@ def prepare_data(path, day_offs):
 
 
 # small func used in lambda expression
-def categorise(row, day_offs):
-    if row["Day"] in day_offs:
+def categorise(row, DAY_OFFS):
+    if row["Day"] in DAY_OFFS:
         return "relax"
     return "work"

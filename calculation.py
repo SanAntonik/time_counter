@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-def calculate_data(df, desired_mean_value):
+def calculate_data(df, DESIRED_MEAN_VALUE):
     """
     Summary:
         complete all the required calculations in the program
@@ -20,7 +20,7 @@ def calculate_data(df, desired_mean_value):
         axis=0).div(60).round().astype(np.int64)
     math_hs, cs_hs, eng_hs = total_per_subject
 
-    # create col 'Total' where each row is the sum 
+    # create col 'Total' where each row is the sum
     # of 'Math', 'CS', and 'Eng' cols
     total_per_day = df[["Math", "CS", "Eng"]].sum(axis=1)
     df["Total"] = total_per_day
@@ -34,14 +34,14 @@ def calculate_data(df, desired_mean_value):
         total_per_day = df_removed_day_offs["Total"]
     mean = round(total_per_day.mean())
     std = round(total_per_day.std(ddof=0))
-    min_to_study = calc_req_study_time(total_per_day, desired_mean_value)
+    min_to_study = calc_req_study_time(total_per_day, DESIRED_MEAN_VALUE)
     return [math_hs, cs_hs, eng_hs, total_hs, sport,
             mean, std, min_to_study]
 
 
 # small func to calculate how many more min you need to
 # study to achieve your desired monthly mean
-def calc_req_study_time(total_per_day, desired_mean_value):
-    req_min = desired_mean_value * len(total_per_day)
+def calc_req_study_time(total_per_day, DESIRED_MEAN_VALUE):
+    req_min = DESIRED_MEAN_VALUE * len(total_per_day)
     studied_min = sum(total_per_day)
     return req_min - studied_min

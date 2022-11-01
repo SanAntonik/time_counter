@@ -4,7 +4,7 @@ import shutil
 # ATTENTION: you can lose your data if you
 # use this function several times in a row
 # because you overwrite your data in Step 4!!!
-def append_report(report, PATH, APPEND_PATH, PREVIOUS_DATA_FOLDER):
+def append_report(report, SOURCE_PATH, APPEND_PATH, PREVIOUS_DATA_FOLDER):
     print("\n\nStarted report appending sequence...")
     # Step 1: check if report was added before
     # If yes, give an exception
@@ -26,13 +26,12 @@ def append_report(report, PATH, APPEND_PATH, PREVIOUS_DATA_FOLDER):
     # Step 3: copy 'study data.txt' to folder with
     # data from previous months. Take the name for
     # freshly copied file from the first row
-    source = PATH
     destination = f"{PREVIOUS_DATA_FOLDER}{report_month}.txt"
-    shutil.copy(source, destination)
+    shutil.copy(SOURCE_PATH, destination)
     print("Data is copied")
     # Step 4: prepare a templete for the next month
     # by overwritting your old data with a fresh template
-    with open("study data.txt", "w", encoding="utf-8") as f:
+    with open(SOURCE_PATH, "w", encoding="utf-8") as f:
         next_month_year = month_year_alternating(report_month)
         empty_first_day = "01:0_0_0:0"
         template_text = f"{next_month_year}\n{empty_first_day}"

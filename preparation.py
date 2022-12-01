@@ -32,10 +32,18 @@ def prepare_data(PATH, DAY_OFFS):
     # Create a new col with info about whether
     # you work or relax on a particular day
     df["Kind"] = df.apply(lambda row: categorise(row, DAY_OFFS), axis=1)
+    # Create two day_offs vars for generate_report
+    # func. With these two vars, reports will
+    # provide a more detailed picture of the month
+    day_offs_count = len(DAY_OFFS)
+    if day_offs_count > 0:
+        day_offs_str = ', '.join(map(str, DAY_OFFS))
+    else:
+        day_offs_str = "you studied every day"
     # Rearrange order of cols
     cols = df.columns.tolist()
     cols = [cols[0]] + [cols[-1]] + cols[1:-1]
-    return month, df[cols]
+    return month, df[cols], day_offs_count, day_offs_str
 
 
 # small func used in lambda expression

@@ -6,9 +6,11 @@ from plotting import plot_data
 
 
 def main(show_report=True, show_stats=True, plot=True, append=False):
-    month, df = prepare_data(PATH, DAY_OFFS)
-    *report_data, mean, std, min_to_study = calculate_data(df, DESIRED_MEAN_VALUE)
-    report = generate_report(month, report_data, mean, std)
+    month, df, day_offs_count, day_offs_str = prepare_data(PATH, DAY_OFFS)
+    *report_data, mean, std, min_to_study = calculate_data(df,
+                                                           DESIRED_MEAN_VALUE)
+    report = generate_report(month, report_data, mean, std,
+                             day_offs_count, day_offs_str)
 
     print(month)
     print(df)
@@ -27,15 +29,12 @@ def main(show_report=True, show_stats=True, plot=True, append=False):
 
 
 if __name__ == '__main__':
-    # path, append_path, previous_data_folder,
-    # desired_mean_value, and day_offs are all constants
-    # I should handle them better somehow
     PATH = "C:/Users/San/Documents/inf/time monitoring/study data.txt"
     APPEND_PATH = "C:/Users/San/Documents/inf/time monitoring/monthly reports/2022 - study reports.txt"
     PREVIOUS_DATA_FOLDER = "C:/Users/San/Documents/inf/time monitoring/monthly data/"
-    DESIRED_MEAN_VALUE = 240
+    DESIRED_MEAN_VALUE = 270
     # pass vacation day numbers
-    DAY_OFFS = [2, 7, 16, 23, 30]
+    DAY_OFFS = [4, 11, 18, 25]
 
     # # data for tests and such
     # PATH = "C:/Users/San/Documents/inf/time monitoring/monthly data/September 2022.txt"

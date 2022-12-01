@@ -4,7 +4,8 @@ import shutil
 # ATTENTION: you can lose your data if you
 # use this function several times in a row
 # because you overwrite your data in Step 4!!!
-def append_report(report, SOURCE_PATH, APPEND_PATH, PREVIOUS_DATA_FOLDER):
+def append_report(report, SOURCE_PATH, APPEND_PATH,
+                  PREVIOUS_DATA_FOLDER):
     print("\n\nStarted report appending sequence...")
     # Step 1: check if report was added before
     # If yes, give an exception
@@ -62,14 +63,21 @@ def month_year_alternating(month_year):
     return f"{next_month} {year}"
 
 
-def generate_report(month, report_data, mean, std):
-    math_hs, cs_hs, english_hs, total_study, sport = report_data
+# for reference: 'w/' stands for 'with'
+# and 'w/o' stands for 'without'
+def generate_report(month, report_data, mean, std,
+                    day_offs_count, day_offs_str):
+    math_hs, cs_hs, english_hs = report_data[:3]
+    total_study, sport, mean_full_data = report_data[3:]
     return f"""
     {month}:
         Math: {math_hs} hours.
         CS: {cs_hs} hours.
         English: {english_hs} hours.
-        Total study time: {total_study} hours.
-        Arithmetic mean: {mean} minutes.
+        Total time: {total_study} hours.
+        Mean w/ day offs: {mean} minutes.
+        Mean w/o day offs: {mean_full_data} minutes.
+        Day offs count: {day_offs_count} days.
+        Day offs: {day_offs_str}.
         Standart deviation: {std} minutes.
         Sport: {sport} times.\n"""

@@ -10,7 +10,11 @@ def mean_std(ax, mean, std):
 
 
 def plot_data(df, mean, std, month):
-    ax = sns.barplot(x="Day", y="Total", data=df, hue="Kind", dodge=False)
+    # another possible approach for handling day offs is to think
+    # that every day with total lower than mean-std is a day off
+    colours = {"work": "#4a69bd", "relax": "#f6b93b"}
+    ax = sns.barplot(x="Day", y="Total", data=df,
+                     hue="Kind", dodge=False, palette=colours)
     mean_std(ax, mean, std)
     plt.title(month)
     plt.legend()

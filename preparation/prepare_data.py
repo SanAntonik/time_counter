@@ -9,6 +9,19 @@ from .handle_nonstudy_data import handle_nonstudy_data
 # this func is gonna be in the central file of your new package
 # consenrned with data preparation
 def prepare_data(PATH, DAY_OFFS, DESIRED_MEAN_VALUE):
+    """
+    Summary:
+        Centerpiece of the package. Here all
+        prep and calc funcs are used to
+        prepare data for future operations
+    Args:
+        PATH (str, constant): path to the txt file with data
+        DAY_OFFS (int list, constant): days offs
+        DESIRED_MEAN_VALUE (str, constant): how
+        many min you want to study per work day
+    Returns:
+        two lists of data
+    """
     # in_df means initial_df; st_df means study_df
     month, in_df = prepare_initial_df(PATH, DAY_OFFS)
     wide_use_data, *report_data = calc_study_data(in_df[["Day", "DKind",

@@ -1,7 +1,3 @@
-import numpy as np
-import pandas as pd
-
-
 def calc_study_data(df, DESIRED_MEAN_VALUE):
     """
     Summary:
@@ -11,22 +7,23 @@ def calc_study_data(df, DESIRED_MEAN_VALUE):
         (Day and DKind are used to identify
         workdays and day offs)
     Args:
-        df: pandas dataframe
+        df: pandas dataframe with study data
+        DESIRED_MEAN_VALUE (str, constant): how
+        many min you want to study per work day
     Returns:
         list of data
     """
     # get summed values from 'Math', 'CS', and 'Eng' cols
     total_per_subject = df[["Math", "CS", "Eng"]].sum(
-        axis=0).div(60).round().astype(np.int64)
+        axis=0).div(60).round().astype(int)
     math_hs, cs_hs, eng_hs = total_per_subject
     # create col 'Total' where each row is the sum
     # of 'Math', 'CS', and 'Eng' cols
     total_per_day = df[["Math", "CS", "Eng"]].sum(axis=1)
     df["Total"] = total_per_day
-    # with full data mean it's easier to compare
-    # the change of your study time because
-    # number of day offs per months differ
-    # from month to month
+    # with full data mean it's easier to compare the
+    # change of your study time because number of
+    # day offs per months differ from month to month
     mean_full_data = round(total_per_day.mean())
     # find how many hours you studied this month
     total_hs = round(total_per_day.sum() / 60)
@@ -37,7 +34,8 @@ def calc_study_data(df, DESIRED_MEAN_VALUE):
         total_per_day = df_removed_day_offs["Total"]
     mean = round(total_per_day.mean())
     std = round(total_per_day.std(ddof=0))
-    min_to_study = calc_req_study_time(total_per_day, DESIRED_MEAN_VALUE)
+    min_to_study = calc_req_study_time(total_per_day,
+                                       DESIRED_MEAN_VALUE)
     # pack several values
     wide_use_data = [df, mean, std, min_to_study]
     return [wide_use_data, math_hs, cs_hs,

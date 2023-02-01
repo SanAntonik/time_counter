@@ -5,18 +5,36 @@ import pandas as pd
 def prepare_initial_df(PATH, DAY_OFFS):
     """
     Summary:
-        Prepare data for further operations
+        Here data goes through initial preparation
     Args:
         PATH (str, constant): path to your data
-        DAY_OFFS (int list constant): days when you relax
+        DAY_OFFS (int list, constant): days when you relax
     Returns:
-        _type_: _description_
         month (str): month when the data was taken
         df (df): DataFrame
+
+    Cols meaning:
+    - Day - day of the month
+    - DKind - day kind
+    - SIL - sport intensity level - has six levels
+    from 0 - didn't exercise to 5 - hard exercise
+    (More info in a separate message)
+    - OD - outdoor
+    - LE - left-eye reading
+    - JG - juggling
+    - GM - gaming
+
+    Exercise intensity notation (Separate message about SIL):
+    - 0 - you didn't exercise
+    - 1 - easy
+    - 2 - between easy and moderate
+    - 3 - moderate
+    - 4 - between moderate and hard
+    - 5 - hard
     """
     # Create list of colnames
     colnames = ["Day", "Math", "CS", "Eng", "Sport",
-                "SIL", "OD", "LE", "JG", "GMG"]
+                "SIL", "OD", "LE", "JG", "GM"]
     # Load data into df with sep equal to ':', '_', and '-'
     df = pd.read_csv(
         filepath_or_buffer=PATH, sep="[:_-]", names=colnames,
@@ -30,14 +48,15 @@ def prepare_initial_df(PATH, DAY_OFFS):
     # in the cols below first two symbols are for easier
     # identification while writing the data. Many thanks
     # to https://stackoverflow.com/a/42349635/11749578
-    cols_to_shorten = ["Sport", "OD", "LE", "JG", "GMG"]
+    cols_to_shorten = ["Sport", "OD", "LE", "JG", "GM"]
     for col in cols_to_shorten:
         df[col] = df[col].str[2:]
     # Convert col dtypes to int64
     df[colnames] = df[colnames].astype("int64")
     # Create a new col with info about whether
     # you work or relax on a particular day
-    df["DKind"] = df.apply(lambda row: categorise(row, DAY_OFFS), axis=1)
+    df["DKind"] = df.apply(lambda row: categorise(row, DAY_OFFS),
+                           axis=1)
     # Rearrange order of cols, so col 'DKind'
     # goes after col 'Day'
     cols = df.columns.tolist()

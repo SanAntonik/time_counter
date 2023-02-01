@@ -2,6 +2,7 @@ from preparation.prepare_data import prepare_data
 from handle_reports import generate_report, append_report
 from monitoring import cur_stats
 from plotting import plot_data
+from constants import PATH, APPEND_PATH, PREVIOUS_DATA_FOLDER
 
 
 def main(show_report=True, show_stats=True, plot=True, append=False):
@@ -26,12 +27,6 @@ def main(show_report=True, show_stats=True, plot=True, append=False):
 
 
 if __name__ == "__main__":
-    # maybe put PATH vars into a separate file called 'constants'(not really sure about the name)
-    # since you rarely change them?
-    PATH = "C:/Users/San/Documents/inf/time monitoring/study data.txt"
-    PATH = "C:/Users/San/Documents/inf/time monitoring/test_data.txt"
-    APPEND_PATH = "C:/Users/San/Documents/inf/time monitoring/monthly reports/2023 - study reports.txt"
-    PREVIOUS_DATA_FOLDER = "C:/Users/San/Documents/inf/time monitoring/monthly data/"
     DESIRED_MEAN_VALUE = 240
     # pass vacation day numbers
     DAY_OFFS = []

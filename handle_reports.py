@@ -65,10 +65,10 @@ def month_year_alternating(month_year):
 
 # for reference: 'w/' stands for 'with'
 # and 'w/o' stands for 'without'
-def generate_report(month, report_data, mean, std,
-                    day_offs_count, day_offs_str):
+def generate_report(month, report_data, mean, std):
     math_hs, cs_hs, english_hs = report_data[:3]
-    total_study, sport, mean_full_data = report_data[3:]
+    total_study, mean_full_data = report_data[3:5]
+    day_offs_count, day_offs_str, sport = report_data[5:]
     return f"""
     {month}:
         Math: {math_hs} hours.

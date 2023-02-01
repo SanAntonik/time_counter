@@ -19,13 +19,14 @@ def prepare_data(PATH, DAY_OFFS, DESIRED_MEAN_VALUE):
     st_df, mean, std, min_to_study = wide_use_data
     # combine st_df with nonstudy cols starting with 'Sport' col
     nonstudy_df = in_df.iloc[:, -6:]
-    out_df = pd.concat([st_df, nonstudy_df], axis=1)
-    day_offs_count, day_offs_str = handle_day_offs(DAY_OFFS)
+    # get how many times you exercised that month and
+    # two day offs vars
     sport = handle_nonstudy_data(nonstudy_df)
+    day_offs_count, day_offs_str = handle_day_offs(DAY_OFFS)
     # add day offs vars and 'sport' var to report_data
     report_data += [day_offs_count, day_offs_str, sport]
-    # get how many times you exercised that month
-    pass
+    # concat dfs to create final df
+    out_df = pd.concat([st_df, nonstudy_df], axis=1)
     # pack values before returning them
     wide_use_data = [month, mean, std, min_to_study, out_df]
     return report_data, wide_use_data

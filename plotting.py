@@ -16,6 +16,8 @@ def plot_data(df, mean, std, month):
     ax = sns.barplot(x="Day", y="Total", data=df,
                      hue="DKind", dodge=False, palette=colours)
     mean_std(ax, mean, std)
-    plt.title(month)
+    plt.title(f"{month} - study time per day")
+    ax.set_ylabel("Study Total in Minutes")
+    ax.set_xlabel("Day of the Month")
     plt.legend()
     plt.show()

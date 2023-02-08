@@ -1,6 +1,8 @@
 import shutil
 
 
+# PUT APPEND_REPORT AND MONTH_YEAR_ALTERATING
+# INTO A SEPARATE APPEND_REPORT FILE
 # ATTENTION: you can lose your data if you
 # use this function several times in a row
 # because you overwrite your data in Step 4!!!
@@ -19,7 +21,8 @@ def append_report(report, SOURCE_PATH, APPEND_PATH,
         # This way it won't be possible to add reports
         # of the same month but with different numerical values
         if report_month in data:
-            raise ValueError("You can't add the same monthly report twice")
+            raise ValueError(
+                "You can't add the same monthly report twice")
     # Step 2: APPEND report to other reports in your file of reports
     with open(APPEND_PATH, "a", encoding="utf-8") as f:
         f.write(report)
@@ -63,6 +66,14 @@ def month_year_alternating(month_year):
     return f"{next_month} {year}"
 
 
+# RENAME TO GENERATE STUDY REPORT
+# REMOVE 'SPORT' FROM HERE AND PUT IT
+# TO GENERATE NONSTUDY REPORT
+# PUT THOSE TWO GENERATE FUNCS BELOW INTO
+# A SEPARATE FILE CALLED GENERATE REPORT
+# FOR EXAMPLE, YOU'LL CALL GENERATE STUDY REPORT
+# IN THE FOLLOWING WAY:
+# from reports.generate_report import generate_study_report
 # for reference: 'w/' stands for 'with'
 # and 'w/o' stands for 'without'
 def generate_report(month, report_data, mean, std):
@@ -81,3 +92,7 @@ def generate_report(month, report_data, mean, std):
         Day offs: {day_offs_str}.
         Standart deviation: {std} minutes.
         Sport: {sport} times.\n"""
+
+
+def generate_nonstudy_report():
+    pass

@@ -29,5 +29,5 @@ def main(show_report=True, show_stats=True, plot=True, append=False):
 if __name__ == "__main__":
     DESIRED_MEAN_VALUE = 240
     # pass vacation day numbers
-    DAY_OFFS = []
+    DAY_OFFS = [2, 4]
     main()

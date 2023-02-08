@@ -14,5 +14,5 @@ def handle_nonstudy_data(df):
         list of data
     """
     # get last value from the 'Sport' col
-    sport = df["Sport"].iloc[-1]
+    sport = df["EC"].iloc[-1]
     return sport

@@ -6,8 +6,6 @@ from .handle_day_offs import handle_day_offs
 from .handle_nonstudy_data import handle_nonstudy_data
 
 
-# this func is gonna be in the central file of your new package
-# consenrned with data preparation
 def prepare_data(PATH, DAY_OFFS, DESIRED_MEAN_VALUE):
     """
     Summary:

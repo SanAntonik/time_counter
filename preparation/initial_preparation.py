@@ -16,7 +16,8 @@ def prepare_initial_df(PATH, DAY_OFFS):
     Cols meaning:
     - Day - day of the month
     - DKind - day kind
-    - SIL - sport intensity level - has six levels
+    - EC - exercise count
+    - EI - exercise intensity - has six levels
     from 0 - didn't exercise to 5 - hard exercise
     (More info in a separate message)
     - OD - outdoor
@@ -24,7 +25,7 @@ def prepare_initial_df(PATH, DAY_OFFS):
     - JG - juggling
     - GM - gaming
 
-    Exercise intensity notation (Separate message about SIL):
+    Explanation about all possible Exercise Intensity levels:
     - 0 - you didn't exercise
     - 1 - easy
     - 2 - between easy and moderate
@@ -33,8 +34,8 @@ def prepare_initial_df(PATH, DAY_OFFS):
     - 5 - hard
     """
     # Create list of colnames
-    colnames = ["Day", "Math", "CS", "Eng", "Sport",
-                "SIL", "OD", "LE", "JG", "GM"]
+    colnames = ["Day", "Math", "CS", "Eng", "EC",
+                "EI", "OD", "LE", "JG", "GM"]
     # Load data into df with sep equal to ':', '_', and '-'
     df = pd.read_csv(
         filepath_or_buffer=PATH, sep="[:_-]", names=colnames,
@@ -48,7 +49,7 @@ def prepare_initial_df(PATH, DAY_OFFS):
     # in the cols below first two symbols are for easier
     # identification while writing the data. Many thanks
     # to https://stackoverflow.com/a/42349635/11749578
-    cols_to_shorten = ["Sport", "OD", "LE", "JG", "GM"]
+    cols_to_shorten = ["EC", "OD", "LE", "JG", "GM"]
     for col in cols_to_shorten:
         df[col] = df[col].str[2:]
     # Convert col dtypes to int64

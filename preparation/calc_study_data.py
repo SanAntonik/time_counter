@@ -14,9 +14,8 @@ def calc_study_data(df, DESIRED_MEAN_VALUE):
         list of data
     """
     # get summed values from 'Math', 'CS', and 'Eng' cols
-    total_per_subject = df[["Math", "CS", "Eng"]].sum(
+    math_hs, cs_hs, eng_hs = df[["Math", "CS", "Eng"]].sum(
         axis=0).div(60).round().astype(int)
-    math_hs, cs_hs, eng_hs = total_per_subject
     # create col 'Total' where each row is the sum
     # of 'Math', 'CS', and 'Eng' cols
     total_per_day = df[["Math", "CS", "Eng"]].sum(axis=1)

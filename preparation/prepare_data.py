@@ -22,22 +22,24 @@ def prepare_data(PATH, DAY_OFFS, DESIRED_MEAN_VALUE):
     """
     # in_df means initial_df; st_df means study_df
     month, in_df = prepare_initial_df(PATH, DAY_OFFS)
-    wide_use_data, *report_data = calc_study_data(in_df[["Day", "DKind",
-                                                         "Math", "CS",
-                                                         "Eng"]],
-                                                  DESIRED_MEAN_VALUE)
+    wide_use_data, *st_report_data = calc_study_data(in_df[["Day", "DKind",
+                                                            "Math", "CS",
+                                                            "Eng"]],
+                                                     DESIRED_MEAN_VALUE)
     # unpack wide_use_data
     st_df, mean, std, min_to_study = wide_use_data
     # combine st_df with nonstudy cols starting with 'Sport' col
-    nonstudy_df = in_df.iloc[:, -6:]
-    # get how many times you exercised that month and
-    # two day offs vars
-    sport = handle_nonstudy_data(nonstudy_df)
-    day_offs_count, day_offs_str = handle_day_offs(DAY_OFFS)
-    # add day offs vars and 'sport' var to report_data
-    report_data += [day_offs_count, day_offs_str, sport]
+    nonstudy_df = in_df[["Day", "EC", "EI", "OD", "LE", "JG", "GM"]]
     # concat dfs to create final df
-    out_df = pd.concat([st_df, nonstudy_df], axis=1)
+    # drop 'Day' col in nonstudy_df to avoid dublicate col
+    # ('Day' col is already present in st_df)
+    out_df = pd.concat([st_df, nonstudy_df.drop("Day", axis=1)], axis=1)
     # pack values before returning them
     wide_use_data = [month, mean, std, min_to_study, out_df]
-    return report_data, wide_use_data
+    # get how many times you exercised that month and
+    # two day offs vars
+    nonst_data = handle_nonstudy_data(nonstudy_df)
+    day_offs_count, day_offs_str = handle_day_offs(DAY_OFFS)
+    # add day offs vars and 'sport' var to report_data
+    st_report_data += [day_offs_count, day_offs_str]
+    return st_report_data, wide_use_data, nonst_data

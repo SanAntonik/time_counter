@@ -8,15 +8,15 @@ def cur_stats(df, month, mean, min_to_study,
     month_alone = month_year_list[0]
     year_alone = month_year_list[1]
 
+    check_month_mean(month, mean, DESIRED_MEAN_VALUE, min_to_study)
     check_day_mean(month_alone, last_day_numb,
                    year_alone, day_total, DESIRED_MEAN_VALUE)
-    check_month_mean(month, mean, DESIRED_MEAN_VALUE, min_to_study)
 
 
 # see whether you studied enough today
 def check_day_mean(month_alone, last_day_numb,
                    year_alone, day_total, DESIRED_MEAN_VALUE):
-    print(f"""\nOn {month_alone} {last_day_numb}, {year_alone}
+    print(f"""\nPer {month_alone} {last_day_numb}, {year_alone}
 You studied: {day_total} min
 You need to study: {DESIRED_MEAN_VALUE} min""")
     if day_total < DESIRED_MEAN_VALUE:
@@ -26,6 +26,8 @@ You need to study: {DESIRED_MEAN_VALUE} min""")
         print("Congratulations! You've studied enough today! Have some rest")
 
 
+# MAYBE THIS FUNC NEEDS TO BE MORE CONNECTED TO THE MONTLY STATS
+# THINK HOW TO REGROUP THIS STUFF
 # see whether you need to study additional min to
 # reach your desired montly mean value
 def check_month_mean(month, mean, DESIRED_MEAN_VALUE, min_to_study):

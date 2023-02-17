@@ -1,8 +1,9 @@
 import shutil
 
 
-# PUT APPEND_REPORT AND MONTH_YEAR_ALTERATING
-# INTO A SEPARATE APPEND_REPORT FILE
+# REWORK THIS
+# ALSO APPEND NONSTUDY REPORT HERE ONCE YOU
+# REALIZE THAT FUNCTIONALITY
 # ATTENTION: you can lose your data if you
 # use this function several times in a row
 # because you overwrite your data in Step 4!!!
@@ -64,35 +65,3 @@ def month_year_alternating(month_year):
         year += 1
     next_month = str_months[next_month_index]
     return f"{next_month} {year}"
-
-
-# RENAME TO GENERATE STUDY REPORT
-# REMOVE 'SPORT' FROM HERE AND PUT IT
-# TO GENERATE NONSTUDY REPORT
-# PUT THOSE TWO GENERATE FUNCS BELOW INTO
-# A SEPARATE FILE CALLED GENERATE REPORT
-# FOR EXAMPLE, YOU'LL CALL GENERATE STUDY REPORT
-# IN THE FOLLOWING WAY:
-# from reports.generate_report import generate_study_report
-# for reference: 'w/' stands for 'with'
-# and 'w/o' stands for 'without'
-def generate_report(month, report_data, mean, std):
-    math_hs, cs_hs, english_hs = report_data[:3]
-    total_study, mean_full_data = report_data[3:5]
-    day_offs_count, day_offs_str, sport = report_data[5:]
-    return f"""
-    {month}:
-        Math: {math_hs} hours.
-        CS: {cs_hs} hours.
-        English: {english_hs} hours.
-        Total time: {total_study} hours.
-        Mean w/ day offs: {mean} minutes.
-        Mean w/o day offs: {mean_full_data} minutes.
-        Day offs count: {day_offs_count} days.
-        Day offs: {day_offs_str}.
-        Standart deviation: {std} minutes.
-        Sport: {sport} times.\n"""
-
-
-def generate_nonstudy_report():
-    pass

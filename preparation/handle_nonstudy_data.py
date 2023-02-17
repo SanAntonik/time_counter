@@ -17,8 +17,9 @@ def handle_nonstudy_data(df):
         axis=0).div(60).round(2).to_list()
     # count how many days you pursued selected activities
     day_count_per_col = [(df[col] != 0).sum() for col in cols]
-    return [cur_day, ex_count, EI_last, EI_count, cols,
-            hs_total_per_col, day_count_per_col]
+    report_data = [cols, ex_count, hs_total_per_col,
+                   day_count_per_col, EI_count]
+    return [cur_day, EI_last, report_data]
 
 
 def handle_EI(df):

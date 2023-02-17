@@ -19,24 +19,23 @@ def generate_nonstudy_report(report_data):
     cols, ex_count, hs_total_per_col = report_data[:3]
     day_count_per_col, EI_count = report_data[3:]
     output = "    Exercise\n"
-    output += "    Total:\n"
-    output += f"        {ex_count}\n"
-    output += "    EI count:\n"
+    output += "        Total:\n"
+    output += f"            {ex_count}\n"
+    output += "        EI count:\n"
     for key, value in EI_count.items():
-        output += f"        {key}: {value}\n"
+        output += f"            {key}: {value}\n"
     for i in range(len(cols)):
         if cols[i] == "OD":
-            output += "Outdoor\n"
+            output += "    Outdoor\n"
         elif cols[i] == "LE":
-            output += "LE reading\n"
+            output += "    LE reading\n"
         elif cols[i] == "JG":
-            output += "Juggling\n"
+            output += "    Juggling\n"
         elif cols[i] == "GM":
-            output += "Gaming\n"
-        output += f"    Total hours: {hs_total_per_col[i]}\n"
-        output += f"    Days count: {day_count_per_col[i]}\n"
-    # add empty spaces before returning
-    return "\t\t".join(output.splitlines(True))
+            output += "    Gaming\n"
+        output += f"        Total hours: {hs_total_per_col[i]}\n"
+        output += f"        Days count: {day_count_per_col[i]}\n"
+    return output
 
 
 def generate_report(month, report_data,

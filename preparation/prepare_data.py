@@ -34,11 +34,10 @@ def prepare_data(PATH, DAY_OFFS, DESIRED_MEAN_VALUE):
     # drop 'Day' col in nonstudy_df to avoid dublicate col
     # ('Day' col is already present in st_df)
     out_df = pd.concat([st_df, nonstudy_df.drop("Day", axis=1)], axis=1)
-    cur_day, EI_last, nonst_rep_data = handle_nonstudy_data(nonstudy_df)
-    day_offs_count, day_offs_str = handle_day_offs(DAY_OFFS)
+    EI_last, nonst_rep_data = handle_nonstudy_data(nonstudy_df)
     # pack values before returning them
-    st_rep_data += [day_offs_count, day_offs_str]
+    st_rep_data += handle_day_offs(DAY_OFFS)
     report_data = st_rep_data, nonst_rep_data
     wide_use_data = [month, mean, std, min_to_study,
-                     out_df, cur_day, EI_last]
+                     out_df, EI_last]
     return report_data, wide_use_data

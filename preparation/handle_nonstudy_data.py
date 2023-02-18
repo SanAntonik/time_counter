@@ -7,7 +7,6 @@ def handle_nonstudy_data(df):
     Returns:
         list of data
     """
-    cur_day = df["Day"].iloc[-1]
     # get last value from the 'EC' col
     ex_count = df["EC"].iloc[-1]
     EI_last, EI_count = handle_EI(df)
@@ -19,7 +18,7 @@ def handle_nonstudy_data(df):
     day_count_per_col = [(df[col] != 0).sum() for col in cols]
     report_data = [cols, ex_count, hs_total_per_col,
                    day_count_per_col, EI_count]
-    return [cur_day, EI_last, report_data]
+    return [EI_last, report_data]
 
 
 def handle_EI(df):

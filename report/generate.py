@@ -50,5 +50,4 @@ def generate_report(month, report_data,
     return f"""
 {month}
 {generate_study_report(st_rep_data, mean, std)}
-{generate_nonstudy_report(nonst_rep_data)}
-    """
+{generate_nonstudy_report(nonst_rep_data)}"""

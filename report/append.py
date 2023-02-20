@@ -1,9 +1,6 @@
 import shutil
 
 
-# REWORK THIS
-# ALSO APPEND NONSTUDY REPORT HERE ONCE YOU
-# REALIZE THAT FUNCTIONALITY
 # ATTENTION: you can lose your data if you
 # use this function several times in a row
 # because you overwrite your data in Step 4!!!
@@ -38,7 +35,7 @@ def append_report(report, SOURCE_PATH, APPEND_PATH,
     # by overwritting your old data with a fresh template
     with open(SOURCE_PATH, "w", encoding="utf-8") as f:
         next_month_year = month_year_alternating(report_month)
-        empty_first_day = "01:0_0_0:0"
+        empty_first_day = "01:0_0_0:pa0-0_od0_le0_jg0_gm0"
         template_text = f"{next_month_year}\n{empty_first_day}"
         f.write(template_text)
     print("Template is written over your old data")

@@ -4,15 +4,15 @@ def generate_study_report(report_data, mean, std):
     math_hs, cs_hs, english_hs = report_data[:3]
     total_study, mean_full_data = report_data[3:5]
     day_offs_count, day_offs_str = report_data[5:]
-    return f"""    Math: {math_hs} hours.
-    CS: {cs_hs} hours.
-    English: {english_hs} hours.
-    Total time: {total_study} hours.
-    Mean w/ day offs: {mean} minutes.
-    Mean w/o day offs: {mean_full_data} minutes.
-    Day offs count: {day_offs_count} days.
-    Day offs: {day_offs_str}.
-    Standart deviation: {std} minutes.\n"""
+    return f"""    Math: {math_hs} hours
+    CS: {cs_hs} hours
+    English: {english_hs} hours
+    Total time: {total_study} hours
+    Mean w/ day offs: {mean} minutes
+    Mean w/o day offs: {mean_full_data} minutes
+    Day offs count: {day_offs_count} days
+    Day offs: {day_offs_str}
+    Standart deviation: {std} minutes"""
 
 
 def generate_nonstudy_report(report_data):
@@ -48,6 +48,6 @@ def generate_report(month, report_data,
     """
     st_rep_data, nonst_rep_data = report_data
     return f"""
-{month}
+{month}:
 {generate_study_report(st_rep_data, mean, std)}
 {generate_nonstudy_report(nonst_rep_data)}"""

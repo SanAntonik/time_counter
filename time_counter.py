@@ -6,15 +6,16 @@ from plotting import plot_data
 from constants import PATH, APPEND_PATH, PREVIOUS_DATA_FOLDER
 
 
-def main(show_report=True, show_stats=True, plot=True, append=False):
+def main(show_df=True, show_report=True, show_stats=True,
+         plot=True, append=False):
     report_data, wide_use_data = prepare_data(PATH, DAY_OFFS,
                                               DESIRED_MEAN_VALUE)
     month, mean, std, min_to_study, df, EI_last = wide_use_data
     report = generate_report(month, report_data,
                              mean, std)
 
-    print(month)
-    print(df)
+    if show_df:
+        print(df)
     if show_report:
         print(report)
     if show_stats:
@@ -31,5 +32,5 @@ def main(show_report=True, show_stats=True, plot=True, append=False):
 if __name__ == "__main__":
     DESIRED_MEAN_VALUE = 240
     # pass vacation day numbers
-    DAY_OFFS = [2, 4, 12, 13]
+    DAY_OFFS = [2, 4, 12, 13, 19]
     main()

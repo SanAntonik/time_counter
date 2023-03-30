@@ -18,8 +18,8 @@ def calc_study_data(df, DESIRED_MEAN_VALUE):
         axis=0).div(60).round().astype(int)
     # create col 'Total' where each row is the sum
     # of 'Math', 'CS', and 'Eng' cols
-    total_per_day = df[["Math", "CS", "Eng"]].sum(axis=1)
-    df["Total"] = total_per_day
+    df = df.assign(Total=df[["Math", "CS", "Eng"]].sum(axis=1))
+    total_per_day = df["Total"]
     # with full data mean it's easier to compare the
     # change of your study time because number of
     # day offs per months differ from month to month

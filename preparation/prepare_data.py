@@ -3,7 +3,7 @@ import pandas as pd
 from .initial_preparation import prepare_initial_df
 from .calc_study_data import calc_study_data
 from .handle_day_offs import handle_day_offs
-from .handle_nonstudy_data import handle_nonstudy_data
+from .nonstudy_data.handle_nonstudy_data import handle_nonstudy_data
 
 
 def prepare_data(PATH, DAY_OFFS, DESIRED_MEAN_VALUE):

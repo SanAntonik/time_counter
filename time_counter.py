@@ -1,7 +1,7 @@
 from preparation.prepare_data import prepare_data
 from report.append import append_report
 from report.generate import generate_report
-from monitoring import cur_stats
+from feedback.give_feedback import give_feedback
 from plotting import plot_data
 from constants import PATH, APPEND_PATH, PREVIOUS_DATA_FOLDER
 
@@ -13,10 +13,10 @@ def main(plot=True, append=False):
     report = generate_report(month, report_data,
                              mean, std)
 
-    print(df)
+    # print(df)
     print(report)
-    cur_stats(df, month, mean, min_to_study,
-              DESIRED_MEAN_VALUE, EI_last)
+    give_feedback(df, month, mean, min_to_study,
+                  DESIRED_MEAN_VALUE, EI_last)
     if append:
         # BEWARE: your 'study data' gets overwritten
         # with a new template if you use append_report!!!
@@ -29,4 +29,4 @@ if __name__ == "__main__":
     DESIRED_MEAN_VALUE = 270
     # pass vacation day numbers
     DAY_OFFS = []
-    main()
+    main(plot=False)

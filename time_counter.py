@@ -7,16 +7,15 @@ from constants import PATH, APPEND_PATH, PREVIOUS_DATA_FOLDER
 
 
 def main(plot=True, append=False):
-    report_data, wide_use_data = prepare_data(PATH, DAY_OFFS,
-                                              DESIRED_MEAN_VALUE)
-    month, mean, std, min_to_study, df, EI_last = wide_use_data
-    report = generate_report(month, report_data,
+    rep_data, wide_use_data, feedback_data = prepare_data(PATH, DAY_OFFS,
+                                                          DESIRED_MEAN_VALUE)
+    month, mean, std, df = wide_use_data
+    report = generate_report(month, rep_data,
                              mean, std)
 
     # print(df)
     print(report)
-    give_feedback(df, month, mean, min_to_study,
-                  DESIRED_MEAN_VALUE, EI_last)
+    give_feedback(feedback_data, month, mean, DESIRED_MEAN_VALUE)
     if append:
         # BEWARE: your 'study data' gets overwritten
         # with a new template if you use append_report!!!

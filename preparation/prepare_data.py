@@ -34,10 +34,18 @@ def prepare_data(PATH, DAY_OFFS, DESIRED_MEAN_VALUE):
     # drop 'Day' col in nonstudy_df to avoid dublicate col
     # ('Day' col is already present in st_df)
     out_df = pd.concat([st_df, nonstudy_df.drop("Day", axis=1)], axis=1)
-    EI_last, nonst_rep_data = handle_nonstudy_data(nonstudy_df)
+    # Create vars for mostly feedback code
+    last_day_total = out_df["Total"].iloc[-1]
+    last_day = out_df["Day"].iloc[-1]
+    # you subtrack 6 here to get a week interval that will be used to
+    # discover how many EIL3+ exercises you had from the last recorded
+    # day to 7 days before
+    first_day = last_day - 6
+    feedback_data, nonst_rep_data = handle_nonstudy_data(nonstudy_df,
+                                                         first_day)
     # pack values before returning them
     st_rep_data += handle_day_offs(DAY_OFFS)
     report_data = st_rep_data, nonst_rep_data
-    wide_use_data = [month, mean, std, min_to_study,
-                     out_df, EI_last]
-    return report_data, wide_use_data
+    feedback_data += min_to_study, last_day_total, last_day
+    wide_use_data = [month, mean, std, out_df]
+    return report_data, wide_use_data, feedback_data

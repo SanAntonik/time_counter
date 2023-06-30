@@ -31,7 +31,7 @@ Input file must be a text file with the following format:
 Jun 29, 2023 Update:
 
 
-GENERAL INFO:
+GENERAL IDEA:
 Time Counter is a program to help me keep track of what I do each day. 
 
 It loads input from a specified file, makes calculations, prints result to the screen, and appends output to another file.
@@ -42,18 +42,22 @@ Input .txt file must be called 'study_data.txt' (also, check if PATH constants a
 
 """
   Month Year
-  0:1_2_3:4-5_6_7_8 per row
+  0:1_2_3:pa4-5_od6_le7_jg8_gm9 per row
 
   where
   0 - Day of the month (from 1 to 31);
   1 - how many min you studied math;
   2 - how many min you studied computer science;
   3 - how many min you studied English;
-  4 - if you exercised that day, update counter by +1;
+  4 - if you exercised that day, update counter by +1 (pa);
   5 - difficulty of the performed exercise from 1 (easy) to 5 (hard). For more info, have a look at APPENDIX;
-  6 -
+  6 - how many min you spent outdoor (od);
+  7 - how many min you read with your left eye (le);
+  8 - how many min you juggled (jg);
+  9 - how many min you played computer games (gm);
 
-  Colons ':' separate different blocks of daily input. The first block (0) just gives day number. The second block (1-3) contains study-related data. The third block (4-8) is about 
+  NOTE1: Colons ':' separate different blocks of daily input. The first block (0) just gives day number. The second block (1-3) contains study-related data. The third block (4-8) is about non-study data.
+  NOTE2: In the third, non-study, block, you can see two-letter-long abbreviations such as 'od' or 'pa' before the actual minutes. They were put there for easier differentiation between different columns in non-study block. To discover what each abbreviation mean, have a look at APPENDIX.
 
   Part of May 2023 text file as an example:
   May 2023
@@ -91,3 +95,10 @@ All possible Exercise Intensity (EI) levels:
 - 3 - moderate
 - 4 - between moderate and hard
 - 5 - hard
+
+Meaning of abbreviations in non-study block:
+- pa - phycical activity
+- od - outdoor
+- le - left eye reading
+- jg - juggling
+- gm - gaming

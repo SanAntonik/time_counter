@@ -32,9 +32,7 @@ Jun 29, 2023 Update:
 
 
 GENERAL IDEA:
-Time Counter is a program to help me keep track of what I do each day. 
-
-It loads input from a specified file, makes calculations, prints result to the screen, and appends output to another file.
+Time Counter is a program to help me keep track of what I do each day. This app loads input from a specified file, makes calculations, prints result to the screen, and appends output to another file.
 
 
 INPUT:
@@ -74,8 +72,34 @@ OUTPUT:
 a bunch of basic statistics + plot
 
 
-PROGRAM FLOW:
-The execution starts with setting up constants. Then we go to main func inside time_counter.py... 
+GENERAL PROGRAM FLOW:
+Before launching the program, we need to check if constants are correctly set up. Rarely changed constants such as file paths lie in constants.py while more frequently updated ones (DESIRED_MEAN_VALUE and DAY_OFFS) can be changed in time_counter.py.
+
+After making sure constants have proper values, we run 'time_counter.py' file. This file is the main file of the entire application.
+
+ORDER OF CALLS (if using all the features)
+time_counter.py/main()
+    1) preparation/prepare_data.py/prepare_data()
+        1.1) initial_preparation.py/prepare_initial_df()
+            1.1.1) categorise()
+        1.2) calc_study_data.py/calc_study_data()
+            1.2.1) calc_req_study_time()
+        1.3) nonstudy_data/handle_nonstudy_data.py/handle_nonstudy_data()
+          1.3.1) get_EI_dicts.py/get_EI_dicts()
+          1.3.2) get_EIL3plus_count.py/get_EIL3plus_count()
+        1.4) handle_day_offs.py/handle_day_offs()
+    2) report/generate.py/generate_report()
+        2.1) generate_study_report()
+        2.2) generate_nonstudy_report()
+    3) feedback/give_feedback.py/give_feedback()
+        3.1) check_month_mean.py/check_month_mean()
+        3.2) check_day_mean.py/check_day_mean()
+        3.3) give_EI_feedback.py/give_EI_feedback()
+        3.4) weekly_EI3plus_count.py/weekly_EI3plus_count()
+    4) report/append.py/append_report()
+        4.1) month_year_alternating()
+    5) plotting.py/plot_data()
+        5.1) mean_std()
 
 
 PROGRAM STRUCTURE:

@@ -32,7 +32,19 @@ Jun 29, 2023 Update:
 
 
 GENERAL IDEA:
-Time Counter is a program to help me keep track of what I do each day. This app loads input from a specified file, makes calculations, prints result to the screen, and appends output to another file.
+Time Counter is a program to help you keep track of what you do each day, so you have a better understanding of how and on what you spend your time
+
+This app loads input from a specified file, makes calculations, prints result to the screen, and appends output to another file.
+
+
+HOW TO RUN THIS PROJECT:
+Before launching the program, we need to check if constants are correctly set up. Rarely changed constants such as file paths lie in constants.py while more frequently updated ones (DESIRED_MEAN_VALUE and DAY_OFFS) can be changed in time_counter.py. 
+
+Also, main function can take the following parameters:
+- plot - by default, set to True - show graph of how long you studied each day and whether that day was a working day or a day off
+- append - by default, set to False - append your montly report and reset 'study_data.txt' (!). Usualy, this operation is done at the beginning of every new month. Be cautious when using this feature because you can lose your data
+
+After making sure constants have proper values and with what parameters to run main func, we run 'time_counter.py' file. This file is the main file of the entire application and is the only file you're supposed to run.
 
 
 INPUT:
@@ -55,7 +67,7 @@ Input .txt file must be called 'study_data.txt' (also, check if PATH constants a
   9 - how many min you played computer games (gm);
 
   NOTE1: Colons ':' separate different blocks of daily input. The first block (0) just gives day number. The second block (1-3) contains study-related data. The third block (4-8) is about non-study data.
-  NOTE2: In the third, non-study, block, you can see two-letter-long abbreviations such as 'od' or 'pa' before the actual minutes. They were put there for easier differentiation between different columns in non-study block. To discover what each abbreviation mean, have a look at APPENDIX.
+  NOTE2: In the third, non-study, block, you can see two-letter-long abbreviations such as 'od' or 'pa' before the actual minutes. They were put there for easier differentiation between different columns in non-study block. To discover what each abbreviation means, have a look at APPENDIX.
 
   Part of May 2023 text file as an example:
   May 2023
@@ -72,11 +84,6 @@ OUTPUT:
 a bunch of basic statistics + plot
 
 
-GENERAL PROGRAM FLOW:
-Before launching the program, we need to check if constants are correctly set up. Rarely changed constants such as file paths lie in constants.py while more frequently updated ones (DESIRED_MEAN_VALUE and DAY_OFFS) can be changed in time_counter.py.
-
-After making sure constants have proper values, we run 'time_counter.py' file. This file is the main file of the entire application.
-
 ORDER OF CALLS (if using all the features)
 time_counter.py/main()
     1) preparation/prepare_data.py/prepare_data()
@@ -85,8 +92,8 @@ time_counter.py/main()
         1.2) calc_study_data.py/calc_study_data()
             1.2.1) calc_req_study_time()
         1.3) nonstudy_data/handle_nonstudy_data.py/handle_nonstudy_data()
-          1.3.1) get_EI_dicts.py/get_EI_dicts()
-          1.3.2) get_EIL3plus_count.py/get_EIL3plus_count()
+            1.3.1) get_EI_dicts.py/get_EI_dicts()
+            1.3.2) get_EIL3plus_count.py/get_EIL3plus_count()
         1.4) handle_day_offs.py/handle_day_offs()
     2) report/generate.py/generate_report()
         2.1) generate_study_report()
@@ -102,8 +109,14 @@ time_counter.py/main()
         5.1) mean_std()
 
 
+USED THIRD-PARTY LIBRARIES:
+- matplotlib
+- seaborn
+- pandas
+
+
 PROGRAM STRUCTURE:
-time_counter.py - the main file of the program. The script is supposed to run from this file!
+time_counter.py - the main file of the program. The script is supposed to run only from this file!
 playground.ipynb - the jupyter notebook where it's more comfortable to test new features
 .gitignore
 README.md - documentation file

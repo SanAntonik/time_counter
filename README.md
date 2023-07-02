@@ -45,7 +45,7 @@ Part of May 2023 text file as an example:
     31:0_250_6:pa22-0_od90_le0_jg0_gm90
 
 NOTE1: Colons ':' separate different blocks of daily input. The first block (0) just gives day number. The second block (1-3) contains study-related data. The third block (4-8) is about non-study data.
-NOTE2: In the third, non-study, block, you can see two-letter-long abbreviations such as 'od' or 'pa' before the actual minutes. They were put there for easier differentiation between different columns in non-study block. To discover what each abbreviation means, have a look at APPENDIX.
+NOTE2: In the third, non-study, block, you can see two-letter-long abbreviations such as 'od' or 'pa' before the actual minutes. They were put there for easier differentiation between different columns in non-study block. To discover what each abbreviation means, have a look at NOTE4.
 NOTE3: All possible Exercise Intensity (EI) levels:
 - 0 - you didn't exercise
 - 1 - easy
@@ -98,10 +98,23 @@ PROGRAM STRUCTURE:
 - README.md - documentation file
 - plotting.py - file containing plotting-related funcs
 - feedback package
-
+    - give_feedback.py - the centerpiece of the package where the other four package files (check_day_mean, check_month_mean etc) are used
+    - check_day_mean.py - tells you whether you studied enough or not TODAY
+    - check_month_mean.py - tells you whether you studied enough or not THIS MONTH
+    - give_EI_feedback.py - tells you how many days passed since you had exercise of a particular intensity per each exercise intensity
+    - weekly_EI3plus_count.py - tells you how many times you had exercises of EI3+ (exercise intensity three or more) in the last seven days
 - preparation package
-
+    - prepare_data.py - the centerpiece of the package where the rest files and one package (nonstudy_data) are used
+    - initial_preparation.py - first step in data preparation process
+    - calc_study_data.py - here study-related data is handled
+    - nonstudy_data package
+        - handle_nonstudy_data.py - the centerpiece of this subpackage where the other two files (get_EI_dicts and get_EIL3plus_count) are used
+        - get_EI_dicts.py - get two EI-related dicts that are gonna be used later
+        - get_EIL3plus_count.py - get how many times you had EI3+ exercises in 7-day period. If it's the beginning of the month, the interval will be smaller
+        - handle_day_offs.py - return your day offs count and the day numbers
 - report package
+    - append.py - here's realized 'append' parameter of main func in time_counter.py
+    - generate.py - here are generated one main report from a study and nonstudy one
 
 
 USED THIRD-PARTY LIBRARIES:

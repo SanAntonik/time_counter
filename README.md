@@ -8,13 +8,11 @@ This app loads input from a specified file, makes calculations, prints result to
 
 
 HOW TO RUN THIS PROJECT:
-Before launching the program, we need to check if constants are correctly set up. Rarely changed constants such as file paths lie in constants.py while more frequently updated ones (DESIRED_MEAN_VALUE and DAY_OFFS) can be changed in time_counter.py. 
-
-Also, main function can take the following parameters:
+1) In constants.py, change PATH variable to where your input .txt file is placed. For the format of input file (study_data.txt or whatever you named it), have a look at INPUT section. Other constants in constants.py (APPEND_PATH and PREVIOUS_DATA_FOLDER) you can leave unchanged because they are only used if you run time_counter.py/main with the parameter 'append=True'. Inside time_counter.py, there are other two constants (DESIRED_MEAN_VALUE and DAY_OFFS). However, for the program to run, you don't need to change them.
+2) Run 'time_counter.py/main' with the default parameters. That is with 'plot=True' and 'append=False'.
+NOTE1: You can pass the following parameters to 'time_counter.py/main' function:
 - plot - by default, set to True - show graph of how long you studied each day and whether that day was a working day or a day off
 - append - by default, set to False - append your montly report and reset 'study_data.txt' (!). Usualy, this operation is done at the beginning of every new month. Be cautious when using this feature because you can lose your data
-
-After making sure constants have proper values and with what parameters to run main func, we run 'time_counter.py' file. This file is the main file of the entire application and is the only file you're supposed to run.
 
 
 INPUT:

@@ -60,7 +60,14 @@ NOTE4: Meaning of abbreviations in non-study block:
 
 
 OUTPUT:
-a bunch of basic statistics + plot
+Output can be separated into terminal output and plot output:
+- terminal output - consists of
+    - print of entire df
+    - report part - here we can see hour count for math, CS, and English, their total (math+cs+eng), mean value with and without day offs, standart deviation, exercise total count and per exercise intensity (EI). After that, there are hour and day count for the four categories: outdoor, LE reading, juggling, and gaming
+    - day-to-day feedback module
+        - monthly stats - here can be seen montly desired mean value, montly current mean value, and how many more min you need to study to achieve montly desired mean value
+        - daily stats - see here how many min you studied that particular day, your desired daily mean goal, and how many more min you need to study to achieve desired daily mean goal. After that, you can see how many days passed since you last had exercise of each intensity. Finaly, there is EI3+ count for the last seven days
+- plot output - per each day of the month, see study total + current montly mean value +- standart deviation
 
 
 ORDER OF CALLS (if using all the features)

@@ -17,23 +17,29 @@ NOTE1: You can pass the following parameters to 'time_counter.py/main' function:
 
 ### INPUT
 Input .txt file must be called 'study_data.txt' (also, check if PATH constants are correct!) and have the following format:
+
 """
+
   Month Year
+  
   0:1_2_3:pa4-5_od6_le7_jg8_gm9 per row
+  
 """
-  where
-    0 - Day of the month (from 1 to 31);
-    1 - how many min you studied math;
-    2 - how many min you studied computer science;
-    3 - how many min you studied English;
-    4 - if you exercised that day, update counter by +1 (pa);
-    5 - the difficulty of the performed exercise from 1 (easy) to 5 (hard). For more info, have a look at NOTE3;
-    6 - how many min you spent outdoor (od);
-    7 - how many min you read with your left eye (le);
-    8 - how many min you juggled (jg);
-    9 - how many min you played computer games (gm);
+
+where
+- 0 - Day of the month (from 1 to 31);
+- 1 - how many min you studied math;
+- 2 - how many min you studied computer science;
+- 3 - how many min you studied English;
+- 4 - if you exercised that day, update counter by +1 (pa);
+- 5 - the difficulty of the performed exercise from 1 (easy) to 5 (hard). For more info, have a look at NOTE3;
+- 6 - how many min you spent outdoor (od);
+- 7 - how many min you read with your left eye (le);
+- 8 - how many min you juggled (jg);
+- 9 - how many min you played computer games (gm);
 
 Part of the May 2023 text file as an example:
+
     May 2023
     01:0_165_130:pa1-2_od65_le0_jg0_gm0
     02:0_251_18:pa2-3_od105_le0_jg0_gm245

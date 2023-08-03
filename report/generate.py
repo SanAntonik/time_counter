@@ -29,8 +29,8 @@ def generate_nonstudy_report(report_data):
             output += "    Outdoor\n"
         elif cols[i] == "LE":
             output += "    LE reading\n"
-        elif cols[i] == "JG":
-            output += "    Juggling\n"
+        elif cols[i] == "RN":
+            output += "    Running\n"
         elif cols[i] == "GM":
             output += "    Gaming\n"
         output += f"        Total hours: {hs_total_per_col[i]}\n"

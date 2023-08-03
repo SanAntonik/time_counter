@@ -29,7 +29,7 @@ def prepare_data(PATH, DAY_OFFS, DESIRED_MEAN_VALUE):
     # unpack wide_use_data
     st_df, mean, std, min_to_study = wide_use_data
     # combine st_df with nonstudy cols starting with 'Sport' col
-    nonstudy_df = in_df[["Day", "EC", "EI", "OD", "LE", "JG", "GM"]]
+    nonstudy_df = in_df[["Day", "EC", "EI", "OD", "LE", "RN", "GM"]]
     # concat dfs to create final df
     # drop 'Day' col in nonstudy_df to avoid dublicate col
     # ('Day' col is already present in st_df)

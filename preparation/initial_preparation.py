@@ -22,7 +22,7 @@ def prepare_initial_df(PATH, DAY_OFFS):
     (More info in a separate message)
     - OD - outdoor
     - LE - left-eye reading
-    - JG - juggling
+    - RN - running
     - GM - gaming
 
     Explanation about all possible Exercise Intensity levels:
@@ -35,7 +35,7 @@ def prepare_initial_df(PATH, DAY_OFFS):
     """
     # Create list of colnames
     colnames = ["Day", "Math", "CS", "Eng", "EC",
-                "EI", "OD", "LE", "JG", "GM"]
+                "EI", "OD", "LE", "RN", "GM"]
     # Load data into df with sep equal to ':', '_', and '-'
     df = pd.read_csv(
         filepath_or_buffer=PATH, sep="[:_-]", names=colnames,
@@ -49,7 +49,7 @@ def prepare_initial_df(PATH, DAY_OFFS):
     # in the cols below first two symbols are for easier
     # identification while writing the data. Many thanks
     # to https://stackoverflow.com/a/42349635/11749578
-    cols_to_shorten = ["EC", "OD", "LE", "JG", "GM"]
+    cols_to_shorten = ["EC", "OD", "LE", "RN", "GM"]
     for col in cols_to_shorten:
         df[col] = df[col].str[2:]
     # Convert col dtypes to int64

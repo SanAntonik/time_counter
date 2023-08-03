@@ -22,7 +22,7 @@ Input .txt file must be called 'study_data.txt' (also, check if PATH constants a
 
   Month Year
   
-  0:1_2_3:pa4-5_od6_le7_jg8_gm9 per row
+  0:1_2_3:pa4-5_od6_le7_rn8_gm9 per row
   
 """
 
@@ -35,18 +35,18 @@ where
 - 5 - the difficulty of the performed exercise from 1 (easy) to 5 (hard). For more info, have a look at NOTE3;
 - 6 - how many min you spent outdoor (od);
 - 7 - how many min you read with your left eye (le);
-- 8 - how many min you juggled (jg);
+- 8 - how many min you ran (rn);
 - 9 - how many min you played computer games (gm);
 
 Part of the May 2023 text file as an example:
 
     May 2023
-    01:0_165_130:pa1-2_od65_le0_jg0_gm0
-    02:0_251_18:pa2-3_od105_le0_jg0_gm245
-    03:0_230_40:pa3-4_od35_le0_jg0_gm112
+    01:0_165_130:pa1-2_od65_le0_rn0_gm0
+    02:0_251_18:pa2-3_od105_le0_rn0_gm245
+    03:0_230_40:pa3-4_od35_le0_rn0_gm112
     ...
-    30:0_250_10:pa22-4_od170_le10_jg15_gm0
-    31:0_250_6:pa22-0_od90_le0_jg0_gm90
+    30:0_250_10:pa22-4_od170_le10_rn15_gm0
+    31:0_250_6:pa22-0_od90_le0_rn0_gm90
 
 NOTE1: Colons ':' separate different blocks of daily input. The first block (0) just gives day number. The second block (1-3) contains study-related data. The third block (4-8) is about non-study data.
 
@@ -64,7 +64,7 @@ NOTE4: Meaning of abbreviations in non-study block:
 - pa - physical activity
 - od - outdoor
 - le - left eye reading
-- jg - juggling
+- rn - running
 - gm - gaming
 
 
@@ -72,7 +72,7 @@ NOTE4: Meaning of abbreviations in non-study block:
 Output can be separated into terminal output and plot output:
 - terminal output - consists of
     - print of entire df
-    - report part - here we can see hour count for math, CS, and English, their total (math+cs+eng), mean value with and without day offs, standart deviation, exercise total count and per exercise intensity (EI). After that, there are hour and day count for the four categories: outdoor, LE reading, juggling, and gaming
+    - report part - here we can see hour count for math, CS, and English, their total (math+cs+eng), mean value with and without day offs, standart deviation, exercise total count and per exercise intensity (EI). After that, there are hour and day count for the four categories: outdoor, LE reading, running, and gaming
     - day-to-day feedback module
         - monthly stats - here can be seen montly desired mean value, montly current mean value, and how many more min you need to study to achieve montly desired mean value
         - daily stats - see here how many min you studied that particular day, your desired daily mean goal, and how many more min you need to study to achieve desired daily mean goal. After that, you can see how many days passed since you last had exercise of each intensity. Finaly, there is EI3+ count for the last seven days

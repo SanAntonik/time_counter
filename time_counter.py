@@ -4,6 +4,7 @@ from report.generate import generate_report
 from feedback.give_feedback import give_feedback
 from plotting import plot_data
 from constants import PATH, APPEND_PATH, PREVIOUS_DATA_FOLDER
+from constants import DESIRED_MEAN_VALUE
 
 
 def main(plot=True, append=False):
@@ -27,5 +28,4 @@ def main(plot=True, append=False):
 
 
 if __name__ == "__main__":
-    DESIRED_MEAN_VALUE = 270
     main(plot=True)

@@ -2,13 +2,12 @@ import pandas as pd
 
 
 # possible new name for modified prepare_data func
-def prepare_initial_df(PATH, DAY_OFFS):
+def prepare_initial_df(PATH):
     """
     Summary:
         Here data goes through initial preparation
     Args:
         PATH (str, constant): path to your data
-        DAY_OFFS (int list, constant): days when you relax
     Returns:
         month (str): month when the data was taken
         df (df): DataFrame
@@ -34,7 +33,7 @@ def prepare_initial_df(PATH, DAY_OFFS):
     - 5 - hard
     """
     # Create list of colnames
-    colnames = ["Day", "Math", "CS", "Eng", "EC",
+    colnames = ["Day", "DKind", "Math", "CS", "Eng", "EC",
                 "EI", "OD", "LE", "RN", "GM"]
     # Load data into df with sep equal to ':', '_', and '-'
     df = pd.read_csv(
@@ -53,21 +52,9 @@ def prepare_initial_df(PATH, DAY_OFFS):
     for col in cols_to_shorten:
         df[col] = df[col].str[2:]
     # Convert col dtypes to int64
-    df[colnames] = df[colnames].astype("int64")
-    # Create a new col with info about whether
-    # you work or relax on a particular day
-    df["DKind"] = df.apply(lambda row: categorise(row, DAY_OFFS),
-                           axis=1)
-    # Rearrange order of cols, so col 'DKind'
-    # goes after col 'Day'
-    cols = df.columns.tolist()
-    cols = [cols[0]] + [cols[-1]] + cols[1:-1]
-    return month, df[cols]
-
-
-# this small func is used in lambda
-# expression in prepare_initial_df function
-def categorise(row, DAY_OFFS):
-    if row["Day"] in DAY_OFFS:
-        return "relax"
-    return "work"
+    cols_to_int = df.columns.difference(['DKind'])
+    df[cols_to_int] = df[cols_to_int].astype("int64")
+    # Expand 'w' with 'word' and 'r' with 'relax'
+    # in the 'DKind' column
+    df["DKind"] = df["DKind"].replace({"w": "work", "r": "relax"})
+    return month, df

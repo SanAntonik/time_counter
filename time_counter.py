@@ -7,7 +7,7 @@ from constants import PATH, APPEND_PATH, PREVIOUS_DATA_FOLDER
 
 
 def main(plot=True, append=False):
-    rep_data, wide_use_data, feedback_data = prepare_data(PATH, DAY_OFFS,
+    rep_data, wide_use_data, feedback_data = prepare_data(PATH,
                                                           DESIRED_MEAN_VALUE)
     month, mean, std, df = wide_use_data
     report = generate_report(month, rep_data,
@@ -17,7 +17,7 @@ def main(plot=True, append=False):
     print(report)
     give_feedback(feedback_data, month, mean, DESIRED_MEAN_VALUE)
     # try using Power BI here
-    df.to_csv("data_for_dashboard.csv", index=False, index_label="Day")
+    # df.to_csv("data_for_dashboard.csv", index=False, index_label="Day")
     if append:
         # BEWARE: your 'study data' gets overwritten
         # with a new template if you use append_report!!!
@@ -28,6 +28,4 @@ def main(plot=True, append=False):
 
 if __name__ == "__main__":
     DESIRED_MEAN_VALUE = 270
-    # pass vacation day numbers
-    DAY_OFFS = [4, 8, 15, 18, 26, 27]
     main(plot=True)

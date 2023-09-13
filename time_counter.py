@@ -14,11 +14,9 @@ def main(plot=True, append=False):
     report = generate_report(month, rep_data,
                              mean, std)
 
-    print(df)
+    # print(df)
     print(report)
     give_feedback(feedback_data, month, mean, DESIRED_MEAN_VALUE)
-    # try using Power BI here
-    # df.to_csv("data_for_dashboard.csv", index=False, index_label="Day")
     if append:
         # BEWARE: your 'study data' gets overwritten
         # with a new template if you use append_report!!!

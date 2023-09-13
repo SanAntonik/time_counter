@@ -8,7 +8,7 @@ This app loads input from a specified file, makes calculations, prints result to
 
 
 ### HOW TO RUN THIS PROJECT
-1) In constants.py, change PATH variable to where your input .txt file is placed. For the format of input file (study_data.txt or whatever you named it), have a look at INPUT section. Other constants in constants.py (APPEND_PATH and PREVIOUS_DATA_FOLDER) you can leave unchanged because they are only used if you run time_counter.py/main with the parameter 'append=True'. Inside time_counter.py, there are other two constants (DESIRED_MEAN_VALUE and DAY_OFFS). However, for the program to run, you don't need to change them.
+1) In constants.py, change PATH variable to where your input .txt file is placed. For the format of input file (data.txt or whatever you named it), have a look at INPUT section. After that, change the value of DESIRED_MEAN_VALUE if the default one is not satisfactory for you. Other constants in constants.py (APPEND_PATH and PREVIOUS_DATA_FOLDER) you can leave unchanged because they are only used if you run time_counter.py/main with the parameter 'append=True'
 2) Run 'time_counter.py/main' with the default parameters. That is with 'plot=True' and 'append=False'.
 NOTE1: You can pass the following parameters to 'time_counter.py/main' function:
 - plot - by default, set to True - show graph of how long you studied each day and whether that day was a working day or a day off
@@ -16,39 +16,38 @@ NOTE1: You can pass the following parameters to 'time_counter.py/main' function:
 
 
 ### INPUT
-Input .txt file must be called 'study_data.txt' (also, check if PATH constants are correct!) and have the following format:
+Input .txt file must be called 'data.txt' (check if PATH constants are correct!) and have the following format:
 
 """
 
   Month Year
   
-  0:1_2_3:pa4-5_od6_le7_rn8_gm9 per row
-  
+  0-1:2_3_4:pa5-6_od7_le8_rn9_gm10 per row
+
 """
 
 where
-- 0 - Day of the month (from 1 to 31);
-- 1 - how many min you studied math;
-- 2 - how many min you studied computer science;
-- 3 - how many min you studied English;
-- 4 - if you exercised that day, update counter by +1 (pa);
-- 5 - the difficulty of the performed exercise from 1 (easy) to 5 (hard). For more info, have a look at NOTE3;
-- 6 - how many min you spent outdoor (od);
-- 7 - how many min you read with your left eye (le);
-- 8 - how many min you ran (rn);
-- 9 - how many min you played computer games (gm);
+- 0 - day of the month (from 1 to 31);
+- 1 - day kind (or type). Either 'w' (work) or 'r' (relaxation, day off)
+- 2 - how many min you studied math;
+- 3 - how many min you studied computer science;
+- 4 - how many min you studied English;
+- 5 - if you exercised that day, update counter by +1 (pa);
+- 6 - the difficulty of the performed exercise from 1 (easy) to 5 (hard). For more info, have a look at NOTE3;
+- 7 - how many min you spent outdoor (od);
+- 9 - how many min you read with your left eye (le);
+- 9 - how many min you ran (rn);
+- 10 - how many min you played computer games (gm);
 
-Part of the May 2023 text file as an example:
+Part of the August 2023 text file as an example:
 
-    May 2023
-    01:0_165_130:pa1-2_od65_le0_rn0_gm0
-    02:0_251_18:pa2-3_od105_le0_rn0_gm245
-    03:0_230_40:pa3-4_od35_le0_rn0_gm112
+    August 2023
+    01-r:0_0_43:pa1-2_od130_le0_rn0_gm0
+    02-w:0_265_15:pa1-0_od105_le0_rn0_gm0
+    03-w:0_205_69:pa2-3_od165_le10_rn0_gm0
     ...
-    30:0_250_10:pa22-4_od170_le10_rn15_gm0
-    31:0_250_6:pa22-0_od90_le0_rn0_gm90
 
-NOTE1: Colons ':' separate different blocks of daily input. The first block (0) just gives day number. The second block (1-3) contains study-related data. The third block (4-8) is about non-study data.
+NOTE1: Colons ':' separate different blocks of daily input. The first block (0-1) gives day number and kind. The second block (2-4) contains study-related data. The third block (5-10) is about non-study data.
 
 NOTE2: In the third, non-study, block, you can see two-letter-long abbreviations such as 'od' or 'pa' before the actual minutes. They were put there for easier differentiation between different columns in non-study block. To discover what each abbreviation means, have a look at NOTE4.
 
@@ -107,7 +106,7 @@ The program is launched in time_counter.py/main(). Then inside main, the functio
 
 ### PROGRAM STRUCTURE
 - time_counter.py - the main file of the program. The script is supposed to run only from this file!
-- constants.py - here lie rarely changed PATH variables
+- constants.py - here lie DESIRED_MEAN_VALUE constant and rarely changed PATH variables
 - playground.ipynb - the jupyter notebook where it's more comfortable sometimes to test new features
 - .gitignore - what files git should ignore
 - README.md - documentation file

@@ -8,11 +8,9 @@ from constants import DESIRED_MEAN_VALUE
 
 
 def main(plot=True, append=False):
-    rep_data, wide_use_data, feedback_data = prepare_data(PATH,
-                                                          DESIRED_MEAN_VALUE)
+    rep_data, wide_use_data, feedback_data = prepare_data(PATH, DESIRED_MEAN_VALUE)
     month, mean, std, df = wide_use_data
-    report = generate_report(month, rep_data,
-                             mean, std)
+    report = generate_report(month, rep_data, mean, std)
 
     # print(df)
     print(report)

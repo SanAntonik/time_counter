@@ -21,10 +21,9 @@ def prepare_data(PATH, DESIRED_MEAN_VALUE):
     """
     # in_df means initial_df; st_df means study_df
     month, in_df = prepare_initial_df(PATH)
-    wide_use_data, *st_rep_data = calc_study_data(in_df[["Day", "DKind",
-                                                         "Math", "CS",
-                                                         "Eng"]],
-                                                  DESIRED_MEAN_VALUE)
+    wide_use_data, *st_rep_data = calc_study_data(
+        in_df[["Day", "DKind", "Math", "CS", "Eng"]], DESIRED_MEAN_VALUE
+    )
     # unpack wide_use_data
     st_df, mean, std, min_to_study = wide_use_data
     # combine st_df with nonstudy cols starting with 'Sport' col
@@ -40,8 +39,7 @@ def prepare_data(PATH, DESIRED_MEAN_VALUE):
     # discover how many EIL3+ exercises you had from the last recorded
     # day to 7 days before
     first_day = last_day - 6
-    feedback_data, nonst_rep_data = handle_nonstudy_data(nonstudy_df,
-                                                         first_day)
+    feedback_data, nonst_rep_data = handle_nonstudy_data(nonstudy_df, first_day)
     # pack values before returning them
     st_rep_data += handle_day_offs(out_df)
     report_data = st_rep_data, nonst_rep_data

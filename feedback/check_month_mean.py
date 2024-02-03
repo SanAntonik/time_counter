@@ -3,7 +3,8 @@
 def check_month_mean(month, mean, DESIRED_MEAN_VALUE, min_to_study):
     print(
         f"""Your {month} desired mean value: {DESIRED_MEAN_VALUE} min
-Your current mean value: {mean} min""")
+Your current mean value: {mean} min"""
+    )
     if mean < DESIRED_MEAN_VALUE:
         print("You haven't studied enough this month.", end=" ")
         print(f"Study {min_to_study} more min")

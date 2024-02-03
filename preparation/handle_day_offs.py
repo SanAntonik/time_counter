@@ -18,7 +18,7 @@ def handle_day_offs(df):
     # These variables will provide a more detailed picture of the month
     day_offs_count = len(day_offs)
     if day_offs_count > 0:
-        day_offs_str = ', '.join(map(str, day_offs))
+        day_offs_str = ", ".join(map(str, day_offs))
     else:
         day_offs_str = "you studied every day"
     return day_offs_count, day_offs_str

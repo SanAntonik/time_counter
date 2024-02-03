@@ -13,5 +13,4 @@ def get_EIL3plus_count(df, first_day):
     Returns:
         count of rows
     """
-    return len(
-        df.loc[(df["Day"] >= first_day) & (df["EI"] >= 3)])
+    return len(df.loc[(df["Day"] >= first_day) & (df["EI"] >= 3)])

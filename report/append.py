@@ -4,8 +4,7 @@ import shutil
 # ATTENTION: you can lose your data if you
 # use this function several times in a row
 # because you overwrite your data in Step 4!!!
-def append_report(report, SOURCE_PATH, APPEND_PATH,
-                  PREVIOUS_DATA_FOLDER):
+def append_report(report, SOURCE_PATH, APPEND_PATH, PREVIOUS_DATA_FOLDER):
     print("\n\nStarted report appending sequence...")
     # Step 1: check if report was added before
     # If yes, give an exception
@@ -19,8 +18,7 @@ def append_report(report, SOURCE_PATH, APPEND_PATH,
         # This way it won't be possible to add reports
         # of the same month but with different numerical values
         if report_month in data:
-            raise ValueError(
-                "You can't add the same monthly report twice")
+            raise ValueError("You can't add the same monthly report twice")
     # Step 2: APPEND report to other reports in your file of reports
     with open(APPEND_PATH, "a", encoding="utf-8") as f:
         f.write(report)
@@ -46,11 +44,20 @@ def append_report(report, SOURCE_PATH, APPEND_PATH,
 # Return next month and year given cur month and year
 # Used in creating new 'study data' file
 def month_year_alternating(month_year):
-    str_months = ["January", "February",
-                  "March", "April", "May",
-                  "June", "July", "August",
-                  "September", "October", "November",
-                  "December"]
+    str_months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ]
     month_year_list = month_year.split()
     cur_month = month_year_list[0]
     year = int(month_year_list[1])

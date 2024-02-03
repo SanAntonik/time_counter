@@ -16,8 +16,8 @@ def give_feedback(feedback_data, month, mean, DESIRED_MEAN_VALUE):
     # Maybe group check_day_mean, give_EI_feedback,
     # and weekly_EI3plus_count into a subpackage because
     # they are daily stats
-    check_day_mean(month_alone, last_day,
-                   year_alone, last_day_total, DESIRED_MEAN_VALUE)
+    check_day_mean(
+        month_alone, last_day, year_alone, last_day_total, DESIRED_MEAN_VALUE
+    )
     give_EI_feedback(EI_last, last_day)
-    weekly_EI3plus_count(month_alone, last_day,
-                         first_day, EI3plus_count)
+    weekly_EI3plus_count(month_alone, last_day, first_day, EI3plus_count)

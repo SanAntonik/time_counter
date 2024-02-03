@@ -38,8 +38,7 @@ def generate_nonstudy_report(report_data):
     return output
 
 
-def generate_report(month, report_data,
-                    mean, std):
+def generate_report(month, report_data, mean, std):
     """
     Summary:
         Generate one big monthly report using

@@ -33,12 +33,15 @@ def prepare_initial_df(PATH):
     - 5 - hard
     """
     # Create list of colnames
-    colnames = ["Day", "DKind", "Math", "CS", "Eng", "EC",
-                "EI", "OD", "LE", "RN", "GM"]
+    colnames = ["Day", "DKind", "Math", "CS", "Eng", "EC", "EI", "OD", "LE", "RN", "GM"]
     # Load data into df with sep equal to ':', '_', and '-'
     df = pd.read_csv(
-        filepath_or_buffer=PATH, sep="[:_-]", names=colnames,
-        header=None, engine="python")
+        filepath_or_buffer=PATH,
+        sep="[:_-]",
+        names=colnames,
+        header=None,
+        engine="python",
+    )
     # Create var 'month' with df data from row 0 and col 0
     month = df.iloc[0][0]
     # Drop the row 0 where 'month' was
@@ -52,7 +55,7 @@ def prepare_initial_df(PATH):
     for col in cols_to_shorten:
         df[col] = df[col].str[2:]
     # Convert col dtypes to int64
-    cols_to_int = df.columns.difference(['DKind'])
+    cols_to_int = df.columns.difference(["DKind"])
     df[cols_to_int] = df[cols_to_int].astype("int64")
     # Expand 'w' with 'word' and 'r' with 'relax'
     # in the 'DKind' column

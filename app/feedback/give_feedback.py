@@ -1,7 +1,7 @@
-from .check_month_mean import check_month_mean
-from .check_day_mean import check_day_mean
-from .give_EI_feedback import give_EI_feedback
-from .weekly_EI3plus_count import weekly_EI3plus_count
+from .utils.check_month_mean import check_month_mean
+from .utils.check_day_mean import check_day_mean
+from .utils.give_EI_feedback import give_EI_feedback
+from .utils.weekly_EI3plus_count import weekly_EI3plus_count
 
 
 def give_feedback(feedback_data, month, mean, DESIRED_MEAN_VALUE):

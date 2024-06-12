@@ -1,8 +1,8 @@
 import pandas as pd
 
-from .initial_preparation import prepare_initial_df
-from .calc_study_data import calc_study_data
-from .handle_day_offs import handle_day_offs
+from .utils.initial_preparation import prepare_initial_df
+from .utils.calc_study_data import calc_study_data
+from .utils.handle_day_offs import handle_day_offs
 from .nonstudy_data.handle_nonstudy_data import handle_nonstudy_data
 
 

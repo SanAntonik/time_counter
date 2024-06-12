@@ -1,5 +1,5 @@
-from .get_EI_dicts import get_EI_dicts
-from .get_EIL3plus_count import get_EIL3plus_count
+from .utils.get_EI_dicts import get_EI_dicts
+from .utils.get_EIL3plus_count import get_EIL3plus_count
 
 
 def handle_nonstudy_data(df, first_day):

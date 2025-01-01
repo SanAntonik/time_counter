@@ -20,7 +20,6 @@ def prepare_initial_df(PATH):
     from 0 - didn't exercise to 5 - hard exercise
     (More info in a separate message)
     - OD - outdoor
-    - LE - left-eye reading
     - RN - running
     - GM - gaming
 
@@ -33,7 +32,7 @@ def prepare_initial_df(PATH):
     - 5 - hard
     """
     # Create list of colnames
-    colnames = ["Day", "DKind", "Math", "CS", "Eng", "EC", "EI", "OD", "LE", "RN", "GM"]
+    colnames = ["Day", "DKind", "Math", "CS", "Eng", "EC", "EI", "OD", "RN", "GM"]
     # Load data into df with sep equal to ':', '_', and '-'
     df = pd.read_csv(
         filepath_or_buffer=PATH,
@@ -51,7 +50,7 @@ def prepare_initial_df(PATH):
     # in the cols below first two symbols are for easier
     # identification while writing the data. Many thanks
     # to https://stackoverflow.com/a/42349635/11749578
-    cols_to_shorten = ["EC", "OD", "LE", "RN", "GM"]
+    cols_to_shorten = ["EC", "OD", "RN", "GM"]
     for col in cols_to_shorten:
         df[col] = df[col].str[2:]
     # Convert col dtypes to int64

@@ -2,7 +2,7 @@
 
 
 ### GENERAL IDEA
-Time Counter is a program to help you keep track of what you do each day, so you have a better understanding of how and on what you spend your time
+Time Counter is a program to help you keep track of what you do each day, so you have a better understanding of how and on what you spend your time.
 
 This app loads input from a specified file, makes calculations, prints result to the screen, and appends output to another file.
 
@@ -22,7 +22,7 @@ Input .txt file must be called 'data.txt' (check if PATH constants are correct!)
 
   Month Year
   
-  0-1:2_3_4:pa5-6_od7_le8_rn9_gm10 per row
+  0-1:2_3_4:pa5-6_od7_rn8_gm9 per row
 
 """
 
@@ -35,19 +35,18 @@ where
 - 5 - if you exercised that day, update counter by +1 (pa);
 - 6 - the difficulty of the performed exercise from 1 (easy) to 5 (hard). For more info, have a look at NOTE3;
 - 7 - how many min you spent outdoor (od);
-- 9 - how many min you read with your left eye (le);
-- 9 - how many min you ran (rn);
-- 10 - how many min you played computer games (gm);
+- 8 - how many min you ran (rn);
+- 9 - how many min you played computer games (gm);
 
 Part of the August 2023 text file as an example:
 
     August 2023
-    01-r:0_0_43:pa1-2_od130_le0_rn0_gm0
-    02-w:0_265_15:pa1-0_od105_le0_rn0_gm0
-    03-w:0_205_69:pa2-3_od165_le10_rn0_gm0
+    01-r:0_0_43:pa1-2_od130_rn0_gm0
+    02-w:0_265_15:pa1-0_od105_rn0_gm0
+    03-w:0_205_69:pa2-3_od165_rn0_gm0
     ...
 
-NOTE1: Colons ':' separate different blocks of daily input. The first block (0-1) gives day number and kind. The second block (2-4) contains study-related data. The third block (5-10) is about non-study data.
+NOTE1: Colons ':' separate different blocks of daily input. The first block (0-1) gives day number and kind. The second block (2-4) contains study-related data. The third block (5-9) is about non-study data.
 
 NOTE2: In the third, non-study, block, you can see two-letter-long abbreviations such as 'od' or 'pa' before the actual minutes. They were put there for easier differentiation between different columns in non-study block. To discover what each abbreviation means, have a look at NOTE4.
 
@@ -62,7 +61,6 @@ NOTE3: All possible Exercise Intensity (EI) levels:
 NOTE4: Meaning of abbreviations in non-study block:
 - pa - physical activity
 - od - outdoor
-- le - left eye reading
 - rn - running
 - gm - gaming
 

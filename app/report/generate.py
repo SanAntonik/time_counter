@@ -27,8 +27,6 @@ def generate_nonstudy_report(report_data):
     for i in range(len(cols)):
         if cols[i] == "OD":
             output += "    Outdoor\n"
-        elif cols[i] == "LE":
-            output += "    LE reading\n"
         elif cols[i] == "RN":
             output += "    Running\n"
         elif cols[i] == "GM":

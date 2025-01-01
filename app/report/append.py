@@ -33,7 +33,7 @@ def append_report(report, SOURCE_PATH, APPEND_PATH, PREVIOUS_DATA_FOLDER):
     # by overwritting your old data with a fresh template
     with open(SOURCE_PATH, "w", encoding="utf-8") as f:
         next_month_year = month_year_alternating(report_month)
-        empty_first_day = "01-w:0_0_0:pa0-0_od0_le0_rn0_gm0"
+        empty_first_day = "01-w:0_0_0:pa0-0_od0_rn0_gm0"
         template_text = f"{next_month_year}\n{empty_first_day}"
         f.write(template_text)
     print("Template is written over your old data")

@@ -1,3 +1,6 @@
+import pandas as pd
+
+
 def calc_study_data(df, DESIRED_MEAN_VALUE):
     """
     Summary:
@@ -32,6 +35,11 @@ def calc_study_data(df, DESIRED_MEAN_VALUE):
     if "relax" in df["DKind"].values:
         df_removed_day_offs = df[~df["DKind"].str.contains("relax")]
         total_per_day = df_removed_day_offs["Total"]
+        # if 'total_per_day' is empty after removing day offs,
+        # replace this empty series with a series containing
+        # a single value of 0, so there won't be a NaN error
+        if total_per_day.empty:
+            total_per_day = pd.Series([0])
     mean = round(total_per_day.mean())
     std = round(total_per_day.std(ddof=0))
     min_to_study = calc_req_study_time(total_per_day, DESIRED_MEAN_VALUE)

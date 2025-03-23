@@ -42,7 +42,7 @@ def prepare_initial_df(PATH):
         engine="python",
     )
     # Create var 'month' with df data from row 0 and col 0
-    month = df.iloc[0][0]
+    month = df.iat[0, 0]
     # Drop the row 0 where 'month' was
     df.drop(index=0, inplace=True)
     # Reset index, so it again starts with 0

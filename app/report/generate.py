@@ -25,12 +25,8 @@ def generate_nonstudy_report(report_data):
     for key, value in EI_count.items():
         output += f"            {key}: {value}\n"
     for i in range(len(cols)):
-        if cols[i] == "OD":
-            output += "    Outdoor\n"
-        elif cols[i] == "RN":
+        if cols[i] == "RN":
             output += "    Running\n"
-        elif cols[i] == "GM":
-            output += "    Gaming\n"
         output += f"        Total hours: {hs_total_per_col[i]}\n"
         output += f"        Days count: {day_count_per_col[i]}\n"
     return output

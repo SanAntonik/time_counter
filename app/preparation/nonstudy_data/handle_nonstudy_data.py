@@ -15,7 +15,7 @@ def handle_nonstudy_data(df, first_day):
     ex_count = df["EC"].iloc[-1]
     EI_last, EI_count = get_EI_dicts(df[["Day", "EI"]])
     EI3plus_count = get_EIL3plus_count(df[["Day", "EI"]], first_day)
-    cols = ["OD", "RN", "GM"]
+    cols = ["RN"]
     # find total in hours for the selected above cols
     hs_total_per_col = df[cols].sum(axis=0).div(60).round(2).to_list()
     # count how many days you pursued selected activities
